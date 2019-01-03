@@ -25,6 +25,7 @@ Parameters:
   TargetModule:
     Description: 'Optional stack name of module implementing Target.'
     Type: String
+    Default: ''
   AlertingModule:
     Description: 'Optional but recommended stack name of alerting module.'
     Type: String
