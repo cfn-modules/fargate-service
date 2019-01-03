@@ -1,0 +1,41 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'cfn-modules test'
+Resources:
+  Vpc:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        S3Endpoint: 'false' # speed up the test
+        DynamoDBEndpoint: 'false' # speed up the test
+        FlowLog: 'false' # speed up the test
+        NatGateways: 'false' # speed up the test
+      TemplateURL: './node_modules/@cfn-modules/vpc/module.yml'
+  Cluster:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: './node_modules/@cfn-modules/ecs-cluster/module.yml'
+  Nlb:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        VpcModule: !GetAtt 'Vpc.Outputs.StackName'
+      TemplateURL: './node_modules/@cfn-modules/nlb/module.yml'
+  Target:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        NlbModule: !GetAtt 'Nlb.Outputs.StackName'
+        VpcModule: !GetAtt 'Vpc.Outputs.StackName'
+      TemplateURL: './node_modules/@cfn-modules/ecs-nlb-listener-and-target/module.yml'
+  Service:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        ClusterModule: !GetAtt 'Cluster.Outputs.StackName'
+        VpcModule: !GetAtt 'Vpc.Outputs.StackName'
+        TargetModule: !GetAtt 'Target.Outputs.StackName'
+      TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'
+Outputs:
+  DnsName:
+    Value: !GetAtt 'Nlb.Outputs.DnsName'
