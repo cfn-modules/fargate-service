@@ -6,6 +6,6 @@ install:
 - 'pip install yamllint==1.13.0'
 - 'pip install cfn-lint==0.10.1'
 script:
-- 'yamllint module.yml'
-- 'cfn-lint -t module.yml'
+- 'yamllint module.yml && yamllint test/*.yml'
+- 'cfn-lint -t module.yml && cfn-lint -t test/*.yml'
 - 'grep -q "LICENSE-2.0" module.yml'

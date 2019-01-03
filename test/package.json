@@ -3,9 +3,15 @@
   "dependencies": {
     "eslint": "5.6.0",
     "ava": "0.25.0",
+    "axios": "0.18.0",
     "@cfn-modules/test": "0.3.0",
     "@cfn-modules/vpc": "1.1.0",
     "@cfn-modules/ecs-cluster": "1.0.0",
+    "@cfn-modules/alb": "1.0.3",
+    "@cfn-modules/alb-listener": "1.0.0",
+    "@cfn-modules/ecs-alb-target": "1.0.1",
+    "@cfn-modules/nlb": "1.0.2",
+    "@cfn-modules/ecs-nlb-listener-and-target": "1.0.3",
     "@cfn-modules/fargate-service": "file:../"
   },
   "scripts": {
