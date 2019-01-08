@@ -9,7 +9,7 @@
     "@cfn-modules/ecs-cluster": "1.0.0",
     "@cfn-modules/alb": "1.0.3",
     "@cfn-modules/alb-listener": "1.0.0",
-    "@cfn-modules/ecs-alb-target": "1.0.1",
+    "@cfn-modules/ecs-alb-target": "1.0.2",
     "@cfn-modules/nlb": "1.0.2",
     "@cfn-modules/ecs-nlb-listener-and-target": "1.0.3",
     "@cfn-modules/fargate-service": "file:../"
