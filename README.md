@@ -34,19 +34,28 @@ Resources:
         ManagedPolicyArns: '' # optional
         AmbassadorImage: '' # optional
         AmbassadorPort: '8000' # optional
-        AmbassadorEnvironment1: '' # optional
-        AmbassadorEnvironment2: '' # optional
-        AmbassadorEnvironment3: '' # optional
+        AmbassadorEnvironment1Key: '' # optional
+        AmbassadorEnvironment1Value: '' # optional
+        AmbassadorEnvironment2Key: '' # optional
+        AmbassadorEnvironment2Value: '' # optional
+        AmbassadorEnvironment3Key: '' # optional
+        AmbassadorEnvironment3Value: '' # optional
         AppImage: 'widdix/hello:v1' # optional
         AppPort: '80' # optional
-        AppEnvironment1: '' # optional
-        AppEnvironment2: '' # optional
-        AppEnvironment3: '' # optional
+        AppEnvironment1Key: '' # optional
+        AppEnvironment1Value: '' # optional
+        AppEnvironment2Key: '' # optional
+        AppEnvironment2Value: '' # optional
+        AppEnvironment3Key: '' # optional
+        AppEnvironment3Value: '' # optional
         SidecarImage: '' # optional
         SidecarPort: '9000' # optional
-        SidecarEnvironment1: '' # optional
-        SidecarEnvironment1: '' # optional
-        SidecarEnvironment1: '' # optional
+        SidecarEnvironment1Key: '' # optional
+        SidecarEnvironment1Value: '' # optional
+        SidecarEnvironment2Key: '' # optional
+        SidecarEnvironment2Value: '' # optional
+        SidecarEnvironment3Key: '' # optional
+        SidecarEnvironment3Value: '' # optional
         Cpu: '0.25' # optional
         Memory: '0.5' # optional
         DesiredCount: '2' # optional
@@ -143,22 +152,43 @@ Resources:
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment1</td>
-      <td>Environment variable for ambassador container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>AmbassadorEnvironment1Key</td>
+      <td>Environment variable 1 key for ambassador container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment2</td>
-      <td>Environment variable for ambassador container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>AmbassadorEnvironment1Value</td>
+      <td>Environment variable 1 value for ambassador container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment3</td>
-      <td>Environment variable for ambassador container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>AmbassadorEnvironment2Key</td>
+      <td>Environment variable 2 key for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment2Value</td>
+      <td>Environment variable 2 value for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment3Key</td>
+      <td>Environment variable 3 key for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment3Value</td>
+      <td>Environment variable 3 value for ambassador container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -178,22 +208,43 @@ Resources:
       <td></td>
     </tr>
     <tr>
-      <td>AppEnvironment1</td>
-      <td>Environment variable for app container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>AppEnvironment1Key</td>
+      <td>Environment variable 1 key for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AppEnvironment2</td>
-      <td>Environment variable for app container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>AppEnvironment1Value</td>
+      <td>Environment variable 1 value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AppEnvironment3</td>
-      <td>Environment variable for app container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>AppEnvironment2Key</td>
+      <td>Environment variable 2 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment2Value</td>
+      <td>Environment variable 2 value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment3Key</td>
+      <td>Environment variable 3 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment3Value</td>
+      <td>Environment variable 3 value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -213,22 +264,43 @@ Resources:
       <td></td>
     </tr>
     <tr>
-      <td>SidecarEnvironment1</td>
-      <td>Environment variable for sidecar container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>SidecarEnvironment1Key</td>
+      <td>Environment variable 1 key for sidecar container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>SidecarEnvironment2</td>
-      <td>Environment variable for sidecar container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>SidecarEnvironment1Value</td>
+      <td>Environment variable 1 value for sidecar container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>SidecarEnvironment3</td>
-      <td>Environment variable for sidecar container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td>SidecarEnvironment2Key</td>
+      <td>Environment variable 2 key for sidecar container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment2Value</td>
+      <td>Environment variable 2 value for sidecar container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment3Key</td>
+      <td>Environment variable 3 key for sidecar container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment3Value</td>
+      <td>Environment variable 3 value for sidecar container</td>
       <td></td>
       <td>no</td>
       <td></td>
