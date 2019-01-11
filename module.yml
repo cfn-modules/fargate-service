@@ -247,6 +247,7 @@ Conditions:
   HasClientSgModule3: !Not [!Equals [!Ref ClientSgModule3, '']]
   HasSubnetsReachPublic: !Equals [!Ref SubnetsReach, Public]
   HasAutoScaling: !Equals [!Ref AutoScaling, 'true']
+  HasManagedPolicyArns: !Not [!Equals [!Ref ManagedPolicyArns, '']]
   HasAppEnvironment1: !Not [!Equals [!Ref AppEnvironment1, '']]
   HasAppEnvironment2: !Not [!Equals [!Ref AppEnvironment2, '']]
   HasAppEnvironment3: !Not [!Equals [!Ref AppEnvironment3, '']]
@@ -293,7 +294,7 @@ Resources:
           Principal:
             Service: 'ecs-tasks.amazonaws.com'
           Action: 'sts:AssumeRole'
-      ManagedPolicyArns: !Split [',', !Ref ManagedPolicyArns]
+      ManagedPolicyArns: !If [HasManagedPolicyArns, !Split [',', !Ref ManagedPolicyArns], !Ref 'AWS::NoValue']
   TaskDefinition:
     Type: 'AWS::ECS::TaskDefinition'
     Properties:
