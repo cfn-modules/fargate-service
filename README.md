@@ -31,7 +31,7 @@ Resources:
         ClientSgModule1: '' # optional
         ClientSgModule2: '' # optional
         ClientSgModule3: '' # optional
-        TaskIamManagedPolicyArns: '' # optional
+        ManagedPolicyArns: '' # optional
         AmbassadorImage: '' # optional
         AmbassadorPort: '8000' # optional
         AmbassadorEnvironment1: '' # optional
@@ -122,7 +122,7 @@ Resources:
       <td></td>
     </tr>
     <tr>
-      <td>TaskIamManagedPolicyArns</td>
+      <td>ManagedPolicyArns</td>
       <td>Comma-delimited list of IAM managed policy ARNs to attach to the task's IAM role</td>
       <td></td>
       <td>no</td>

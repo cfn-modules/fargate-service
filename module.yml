@@ -42,7 +42,7 @@ Parameters:
     Description: 'Optional stack name of client-sg module to mark traffic from EC2 instance.'
     Type: String
     Default: ''
-  TaskIamManagedPolicyArns:
+  ManagedPolicyArns:
     Description: 'Comma-delimited list of IAM managed policy ARNs to attach to the task''s IAM role'
     Type: String
     Default: ''
@@ -293,7 +293,7 @@ Resources:
           Principal:
             Service: 'ecs-tasks.amazonaws.com'
           Action: 'sts:AssumeRole'
-      ManagedPolicyArns: !Split [',', !Ref TaskIamManagedPolicyArns]
+      ManagedPolicyArns: !Split [',', !Ref ManagedPolicyArns]
   TaskDefinition:
     Type: 'AWS::ECS::TaskDefinition'
     Properties:
