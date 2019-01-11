@@ -31,12 +31,22 @@ Resources:
         ClientSgModule1: '' # optional
         ClientSgModule2: '' # optional
         ClientSgModule3: '' # optional
+        TaskIamManagedPolicyArns: '' # optional
         AmbassadorImage: '' # optional
         AmbassadorPort: '8000' # optional
+        AmbassadorEnvironment1: '' # optional
+        AmbassadorEnvironment2: '' # optional
+        AmbassadorEnvironment3: '' # optional
         AppImage: 'widdix/hello:v1' # optional
         AppPort: '80' # optional
+        AppEnvironment1: '' # optional
+        AppEnvironment2: '' # optional
+        AppEnvironment3: '' # optional
         SidecarImage: '' # optional
         SidecarPort: '9000' # optional
+        SidecarEnvironment1: '' # optional
+        SidecarEnvironment1: '' # optional
+        SidecarEnvironment1: '' # optional
         Cpu: '0.25' # optional
         Memory: '0.5' # optional
         DesiredCount: '2' # optional
@@ -112,6 +122,13 @@ Resources:
       <td></td>
     </tr>
     <tr>
+      <td>TaskIamManagedPolicyArns</td>
+      <td>Comma-delimited list of IAM managed policy ARNs to attach to the task's IAM role</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>AmbassadorImage</td>
       <td>Docker image to use for the ambassador container (https://docs.microsoft.com/en-us/azure/architecture/patterns/ambassador). You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
       <td></td>
@@ -122,6 +139,27 @@ Resources:
       <td>AmbassadorPort</td>
       <td>The port exposed by the ambassador container that receives traffic from the load balancer (AmbassadorPort != AppPort != SidecarPort; ignored if AmbassadorImage and/or TargetModule are/is not set)</td>
       <td>8000</td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment1</td>
+      <td>Environment variable for ambassador container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment2</td>
+      <td>Environment variable for ambassador container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment3</td>
+      <td>Environment variable for ambassador container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
       <td>no</td>
       <td></td>
     </tr>
@@ -140,6 +178,27 @@ Resources:
       <td></td>
     </tr>
     <tr>
+      <td>AppEnvironment1</td>
+      <td>Environment variable for app container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment2</td>
+      <td>Environment variable for app container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment3</td>
+      <td>Environment variable for app container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>SidecarImage</td>
       <td>Docker image to use for the sidecar container (https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar). You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
       <td></td>
@@ -150,6 +209,27 @@ Resources:
       <td>SidecarPort</td>
       <td>The port exposed by the sidecar container reachable from the app container on host localhost (SidecarPort != AmbassadorPort != AppPort)</td>
       <td>9000</td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment1</td>
+      <td>Environment variable for sidecar container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment2</td>
+      <td>Environment variable for sidecar container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment3</td>
+      <td>Environment variable for sidecar container (Key and value delimited by =>, e.g.: TIMOUT=>60)</td>
+      <td></td>
       <td>no</td>
       <td></td>
     </tr>
