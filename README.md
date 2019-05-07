@@ -40,6 +40,12 @@ Resources:
         AmbassadorEnvironment2Value: '' # optional
         AmbassadorEnvironment3Key: '' # optional
         AmbassadorEnvironment3Value: '' # optional
+        AmbassadorEnvironment4Key: '' # optional
+        AmbassadorEnvironment4Value: '' # optional
+        AmbassadorEnvironment5Key: '' # optional
+        AmbassadorEnvironment5Value: '' # optional
+        AmbassadorEnvironment6Key: '' # optional
+        AmbassadorEnvironment6Value: '' # optional
         AppImage: 'widdix/hello:v1' # optional
         AppPort: '80' # optional
         AppEnvironment1Key: '' # optional
@@ -189,6 +195,48 @@ Resources:
     <tr>
       <td>AmbassadorEnvironment3Value</td>
       <td>Environment variable 3 value for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment4Key</td>
+      <td>Environment variable 4 key for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment4Value</td>
+      <td>Environment variable 4 value for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment5Key</td>
+      <td>Environment variable 5 key for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment5Value</td>
+      <td>Environment variable 5 value for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment6Key</td>
+      <td>Environment variable 6 key for ambassador container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AmbassadorEnvironment6Value</td>
+      <td>Environment variable 6 value for ambassador container</td>
       <td></td>
       <td>no</td>
       <td></td>
