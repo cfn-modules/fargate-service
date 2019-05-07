@@ -1,6 +1,6 @@
 {
   "name": "@cfn-modules/fargate-service",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "Application load balancer.",
   "author": "Michael Wittig <michael@widdix.de>",
   "license": "Apache-2.0",
