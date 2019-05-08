@@ -48,6 +48,12 @@ Resources:
         AppEnvironment2Value: '' # optional
         AppEnvironment3Key: '' # optional
         AppEnvironment3Value: '' # optional
+        AppEnvironment4Key: '' # optional
+        AppEnvironment4Value: '' # optional
+        AppEnvironment5Key: '' # optional
+        AppEnvironment5Value: '' # optional
+        AppEnvironment6Key: '' # optional
+        AppEnvironment6Value: '' # optional
         SidecarImage: '' # optional
         SidecarPort: '9000' # optional
         SidecarEnvironment1Key: '' # optional
@@ -245,6 +251,48 @@ Resources:
     <tr>
       <td>AppEnvironment3Value</td>
       <td>Environment variable 3 value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment4Key</td>
+      <td>Environment variable 4 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment4Value</td>
+      <td>Environment variable 4 value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment5Key</td>
+      <td>Environment variable 5 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment5Value</td>
+      <td>Environment variable 5 value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment6Key</td>
+      <td>Environment variable 6 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment6Value</td>
+      <td>Environment variable 6 value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>

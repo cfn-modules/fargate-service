@@ -114,6 +114,30 @@ Parameters:
     Description: 'Optional environment variable 3 value for app container.'
     Type: String
     Default: ''
+  AppEnvironment4Key:
+    Description: 'Optional environment variable 4 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment4Value:
+    Description: 'Optional environment variable 4 value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment5Key:
+    Description: 'Optional environment variable 5 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment5Value:
+    Description: 'Optional environment variable 5 value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment6Key:
+    Description: 'Optional environment variable 6 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment6Value:
+    Description: 'Optional environment variable 6 value for app container.'
+    Type: String
+    Default: ''
   SidecarImage:
     Description: 'Optional Docker image to use for the sidecar container (https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar). You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
     Type: String
@@ -287,6 +311,9 @@ Conditions:
   HasAppEnvironment1Key: !Not [!Equals [!Ref AppEnvironment1Key, '']]
   HasAppEnvironment2Key: !Not [!Equals [!Ref AppEnvironment2Key, '']]
   HasAppEnvironment3Key: !Not [!Equals [!Ref AppEnvironment3Key, '']]
+  HasAppEnvironment4Key: !Not [!Equals [!Ref AppEnvironment4Key, '']]
+  HasAppEnvironment5Key: !Not [!Equals [!Ref AppEnvironment5Key, '']]
+  HasAppEnvironment6Key: !Not [!Equals [!Ref AppEnvironment6Key, '']]
   HasAmbassadorImage: !Not [!Equals [!Ref AmbassadorImage, '']]
   HasAmbassadorEnvironment1Key: !Not [!Equals [!Ref AmbassadorEnvironment1Key, '']]
   HasAmbassadorEnvironment2Key: !Not [!Equals [!Ref AmbassadorEnvironment2Key, '']]
@@ -368,6 +395,9 @@ Resources:
         - !If [HasAppEnvironment1Key, {Name: !Ref AppEnvironment1Key, Value: !Ref AppEnvironment1Value}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment2Key, {Name: !Ref AppEnvironment2Key, Value: !Ref AppEnvironment2Value}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment3Key, {Name: !Ref AppEnvironment3Key, Value: !Ref AppEnvironment3Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment4Key, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment5Key, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment6Key, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
       - !If
         - HasSidecarImage
         - Name: sidecar
@@ -557,7 +587,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '1.1.1'
+    Value: '1.2.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
