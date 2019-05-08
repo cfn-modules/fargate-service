@@ -5,7 +5,7 @@
     "ava": "1.2.1",
     "axios": "0.18.0",
     "@cfn-modules/test": "0.5.1",
-    "@cfn-modules/vpc": "1.1.0",
+    "@cfn-modules/vpc": "1.1.1",
     "@cfn-modules/ecs-cluster": "1.1.0",
     "@cfn-modules/alb": "1.0.3",
     "@cfn-modules/alb-listener": "1.0.0",

@@ -2,7 +2,7 @@ const test = require('ava');
 const cfntest = require('@cfn-modules/test');
 const axios = require('axios');
 
-test('defaults', async t => {
+test.serial('defaults', async t => {
   const stackName = cfntest.stackName();
   try {
     t.log(await cfntest.createStack(`${__dirname}/defaults.yml`, stackName, {}));
@@ -13,7 +13,7 @@ test('defaults', async t => {
   }
 });
 
-test('alb-single', async t => {
+test.serial('alb-single', async t => {
   const stackName = cfntest.stackName();
   try {
     t.log(await cfntest.createStack(`${__dirname}/alb-single.yml`, stackName, {}));
@@ -28,7 +28,7 @@ test('alb-single', async t => {
   }
 });
 
-test('nlb-single', async t => {
+test.serial('nlb-single', async t => {
   const stackName = cfntest.stackName();
   try {
     t.log(await cfntest.createStack(`${__dirname}/nlb-single.yml`, stackName, {}));
