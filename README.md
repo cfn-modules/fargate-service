@@ -40,12 +40,6 @@ Resources:
         AmbassadorEnvironment2Value: '' # optional
         AmbassadorEnvironment3Key: '' # optional
         AmbassadorEnvironment3Value: '' # optional
-        AmbassadorEnvironment4Key: '' # optional
-        AmbassadorEnvironment4Value: '' # optional
-        AmbassadorEnvironment5Key: '' # optional
-        AmbassadorEnvironment5Value: '' # optional
-        AmbassadorEnvironment6Key: '' # optional
-        AmbassadorEnvironment6Value: '' # optional
         AppImage: 'widdix/hello:v1' # optional
         AppPort: '80' # optional
         AppEnvironment1Key: '' # optional
@@ -54,6 +48,12 @@ Resources:
         AppEnvironment2Value: '' # optional
         AppEnvironment3Key: '' # optional
         AppEnvironment3Value: '' # optional
+        AppEnvironment4Key: '' # optional
+        AppEnvironment4Value: '' # optional
+        AppEnvironment5Key: '' # optional
+        AppEnvironment5Value: '' # optional
+        AppEnvironment6Key: '' # optional
+        AppEnvironment6Value: '' # optional
         SidecarImage: '' # optional
         SidecarPort: '9000' # optional
         SidecarEnvironment1Key: '' # optional
@@ -200,48 +200,6 @@ Resources:
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment4Key</td>
-      <td>Environment variable 4 key for ambassador container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AmbassadorEnvironment4Value</td>
-      <td>Environment variable 4 value for ambassador container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AmbassadorEnvironment5Key</td>
-      <td>Environment variable 5 key for ambassador container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AmbassadorEnvironment5Value</td>
-      <td>Environment variable 5 value for ambassador container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AmbassadorEnvironment6Key</td>
-      <td>Environment variable 6 key for ambassador container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AmbassadorEnvironment6Value</td>
-      <td>Environment variable 6 value for ambassador container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
       <td>AppImage</td>
       <td>The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
       <td>widdix/hello:v1</td>
@@ -293,6 +251,48 @@ Resources:
     <tr>
       <td>AppEnvironment3Value</td>
       <td>Environment variable 3 value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment4Key</td>
+      <td>Environment variable 4 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment4Value</td>
+      <td>Environment variable 4 value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment5Key</td>
+      <td>Environment variable 5 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment5Value</td>
+      <td>Environment variable 5 value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment6Key</td>
+      <td>Environment variable 6 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment6Value</td>
+      <td>Environment variable 6 value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
