@@ -587,7 +587,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '1.1.1'
+    Value: '1.2.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
