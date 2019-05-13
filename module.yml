@@ -46,38 +46,38 @@ Parameters:
     Description: 'Comma-delimited list of IAM managed policy ARNs to attach to the task''s IAM role'
     Type: String
     Default: ''
-  AmbassadorImage:
-    Description: 'Optional Docker image to use for the ambassador container (https://docs.microsoft.com/en-us/azure/architecture/patterns/ambassador). You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
+  ProxyImage:
+    Description: 'Optional Docker image to use for the proxy container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
     Type: String
     Default: ''
-  AmbassadorPort:
-    Description: 'The port exposed by the ambassador container that receives traffic from the load balancer (AmbassadorPort <> AppPort <> SidecarPort; ignored if AmbassadorImage is not set).'
+  ProxyPort:
+    Description: 'The port exposed by the proxy container that receives traffic from the load balancer (ProxyPort <> AppPort <> SidecarPort; ignored if ProxyImage is not set).'
     Type: Number
     Default: 8000
     MinValue: 1
     MaxValue: 49150
-  AmbassadorEnvironment1Key:
-    Description: 'Optional environment variable 1 key for ambassador container.'
+  ProxyEnvironment1Key:
+    Description: 'Optional environment variable 1 key for proxy container.'
     Type: String
     Default: ''
-  AmbassadorEnvironment1Value:
-    Description: 'Optional environment variable 1 value for ambassador container.'
+  ProxyEnvironment1Value:
+    Description: 'Optional environment variable 1 value for proxy container.'
     Type: String
     Default: ''
-  AmbassadorEnvironment2Key:
-    Description: 'Optional environment variable 2 key for ambassador container.'
+  ProxyEnvironment2Key:
+    Description: 'Optional environment variable 2 key for proxy container.'
     Type: String
     Default: ''
-  AmbassadorEnvironment2Value:
-    Description: 'Optional environment variable 2 value for ambassador container.'
+  ProxyEnvironment2Value:
+    Description: 'Optional environment variable 2 value for proxy container.'
     Type: String
     Default: ''
-  AmbassadorEnvironment3Key:
-    Description: 'Optional environment variable 3 key for ambassador container.'
+  ProxyEnvironment3Key:
+    Description: 'Optional environment variable 3 key for proxy container.'
     Type: String
     Default: ''
-  AmbassadorEnvironment3Value:
-    Description: 'Optional environment variable 3 value for ambassador container.'
+  ProxyEnvironment3Value:
+    Description: 'Optional environment variable 3 value for proxy container.'
     Type: String
     Default: ''
   AppImage:
@@ -85,7 +85,7 @@ Parameters:
     Type: String
     Default: 'widdix/hello:v1'
   AppPort:
-    Description: 'The port exposed by the app container that receives traffic from the load balancer or the ambassador container (AppPort <> AmbassadorPort <> SidecarPort).'
+    Description: 'The port exposed by the app container that receives traffic from the load balancer or the proxy container (AppPort <> ProxyPort <> SidecarPort).'
     Type: Number
     Default: 80
     MinValue: 1
@@ -139,11 +139,11 @@ Parameters:
     Type: String
     Default: ''
   SidecarImage:
-    Description: 'Optional Docker image to use for the sidecar container (https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar). You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
+    Description: 'Optional Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
     Type: String
     Default: ''
   SidecarPort:
-    Description: 'The port exposed by the sidecar container reachable from the app container on host localhost (SidecarPort <> AmbassadorPort <> AppPort).'
+    Description: 'The port exposed by the sidecar container reachable from the app container on host localhost (SidecarPort <> ProxyPort <> AppPort).'
     Type: Number
     Default: 9000
     MinValue: 1
@@ -314,10 +314,10 @@ Conditions:
   HasAppEnvironment4Key: !Not [!Equals [!Ref AppEnvironment4Key, '']]
   HasAppEnvironment5Key: !Not [!Equals [!Ref AppEnvironment5Key, '']]
   HasAppEnvironment6Key: !Not [!Equals [!Ref AppEnvironment6Key, '']]
-  HasAmbassadorImage: !Not [!Equals [!Ref AmbassadorImage, '']]
-  HasAmbassadorEnvironment1Key: !Not [!Equals [!Ref AmbassadorEnvironment1Key, '']]
-  HasAmbassadorEnvironment2Key: !Not [!Equals [!Ref AmbassadorEnvironment2Key, '']]
-  HasAmbassadorEnvironment3Key: !Not [!Equals [!Ref AmbassadorEnvironment3Key, '']]
+  HasProxyImage: !Not [!Equals [!Ref ProxyImage, '']]
+  HasProxyEnvironment1Key: !Not [!Equals [!Ref ProxyEnvironment1Key, '']]
+  HasProxyEnvironment2Key: !Not [!Equals [!Ref ProxyEnvironment2Key, '']]
+  HasProxyEnvironment3Key: !Not [!Equals [!Ref ProxyEnvironment3Key, '']]
   HasSidecarImage: !Not [!Equals [!Ref SidecarImage, '']]
   HasSidecarEnvironment1Key: !Not [!Equals [!Ref SidecarEnvironment1Key, '']]
   HasSidecarEnvironment2Key: !Not [!Equals [!Ref SidecarEnvironment2Key, '']]
@@ -363,27 +363,27 @@ Resources:
     Properties:
       ContainerDefinitions:
       - !If
-        - HasAmbassadorImage
-        - Name: ambassador
-          Image: !Ref AmbassadorImage
+        - HasProxyImage
+        - Name: proxy
+          Image: !Ref ProxyImage
           PortMappings:
-          - !If [HasTargetModule, {ContainerPort: !Ref AmbassadorPort, Protocol: tcp}, !Ref 'AWS::NoValue']
+          - !If [HasTargetModule, {ContainerPort: !Ref ProxyPort, Protocol: tcp}, !Ref 'AWS::NoValue']
           Essential: true
           LogConfiguration:
             LogDriver: awslogs
             Options:
               'awslogs-region': !Ref 'AWS::Region'
               'awslogs-group': !Ref LogGroup
-              'awslogs-stream-prefix': ambassador
+              'awslogs-stream-prefix': proxy
           Environment:
-          - !If [HasAmbassadorEnvironment1Key, {Name: !Ref AmbassadorEnvironment1Key, Value: !Ref AmbassadorEnvironment1Value}, !Ref 'AWS::NoValue']
-          - !If [HasAmbassadorEnvironment2Key, {Name: !Ref AmbassadorEnvironment2Key, Value: !Ref AmbassadorEnvironment2Value}, !Ref 'AWS::NoValue']
-          - !If [HasAmbassadorEnvironment3Key, {Name: !Ref AmbassadorEnvironment3Key, Value: !Ref AmbassadorEnvironment3Value}, !Ref 'AWS::NoValue']
+          - !If [HasProxyEnvironment1Key, {Name: !Ref ProxyEnvironment1Key, Value: !Ref ProxyEnvironment1Value}, !Ref 'AWS::NoValue']
+          - !If [HasProxyEnvironment2Key, {Name: !Ref ProxyEnvironment2Key, Value: !Ref ProxyEnvironment2Value}, !Ref 'AWS::NoValue']
+          - !If [HasProxyEnvironment3Key, {Name: !Ref ProxyEnvironment3Key, Value: !Ref ProxyEnvironment3Value}, !Ref 'AWS::NoValue']
         - !Ref 'AWS::NoValue'
       - Name: app
         Image: !Ref AppImage
         PortMappings:
-        - !If [HasAmbassadorImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
+        - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
         Essential: true
         LogConfiguration:
           LogDriver: awslogs
@@ -445,7 +445,7 @@ Resources:
       HealthCheckGracePeriodSeconds: !If [HasTargetModule, !Ref HealthCheckGracePeriodSeconds, !Ref 'AWS::NoValue']
       LaunchType: FARGATE
       LoadBalancers:
-      - !If [HasTargetModule, {ContainerName: !If [HasAmbassadorImage, ambassador, app], ContainerPort: !If [HasAmbassadorImage, !Ref AmbassadorPort, !Ref AppPort], TargetGroupArn: {'Fn::ImportValue': !Sub '${TargetModule}-Arn'}}, !Ref 'AWS::NoValue']
+      - !If [HasTargetModule, {ContainerName: !If [HasProxyImage, proxy, app], ContainerPort: !If [HasProxyImage, !Ref ProxyPort, !Ref AppPort], TargetGroupArn: {'Fn::ImportValue': !Sub '${TargetModule}-Arn'}}, !Ref 'AWS::NoValue']
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: !If [HasSubnetsReachPublic, ENABLED, DISABLED]
@@ -587,7 +587,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '1.2.0'
+    Value: '2.0.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
