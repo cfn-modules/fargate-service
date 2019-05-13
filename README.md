@@ -419,3 +419,15 @@ Resources:
   </tbody>
 </table>
 
+## Migration Guides
+
+### Migrate to v2
+
+* Rename `AmbassadorImage` to `ProxyImage`.
+* Rename `AmbassadorPort` to `ProxyPort`.
+* Rename `AmbassadorEnvironment1Key` to `ProxyEnvironment1Key`.
+* Rename `AmbassadorEnvironment1Value` to `ProxyEnvironment1Value`.
+* Rename `AmbassadorEnvironment2Key` to `ProxyEnvironment2Key`.
+* Rename `AmbassadorEnvironment2Value` to `ProxyEnvironment2Value`.
+* Rename `AmbassadorEnvironment3Key` to `ProxyEnvironment3Key`.
+* Rename `AmbassadorEnvironment3Value` to `ProxyEnvironment3Value`.
