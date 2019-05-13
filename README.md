@@ -32,14 +32,14 @@ Resources:
         ClientSgModule2: '' # optional
         ClientSgModule3: '' # optional
         ManagedPolicyArns: '' # optional
-        AmbassadorImage: '' # optional
-        AmbassadorPort: '8000' # optional
-        AmbassadorEnvironment1Key: '' # optional
-        AmbassadorEnvironment1Value: '' # optional
-        AmbassadorEnvironment2Key: '' # optional
-        AmbassadorEnvironment2Value: '' # optional
-        AmbassadorEnvironment3Key: '' # optional
-        AmbassadorEnvironment3Value: '' # optional
+        ProxyImage: '' # optional
+        ProxyPort: '8000' # optional
+        ProxyEnvironment1Key: '' # optional
+        ProxyEnvironment1Value: '' # optional
+        ProxyEnvironment2Key: '' # optional
+        ProxyEnvironment2Value: '' # optional
+        ProxyEnvironment3Key: '' # optional
+        ProxyEnvironment3Value: '' # optional
         AppImage: 'widdix/hello:v1' # optional
         AppPort: '80' # optional
         AppEnvironment1Key: '' # optional
@@ -144,57 +144,57 @@ Resources:
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorImage</td>
-      <td>Docker image to use for the ambassador container (https://docs.microsoft.com/en-us/azure/architecture/patterns/ambassador). You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
+      <td>ProxyImage</td>
+      <td>Docker image to use for the proxy container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorPort</td>
-      <td>The port exposed by the ambassador container that receives traffic from the load balancer (AmbassadorPort != AppPort != SidecarPort; ignored if AmbassadorImage and/or TargetModule are/is not set)</td>
+      <td>ProxyPort</td>
+      <td>The port exposed by the proxy container that receives traffic from the load balancer (ProxyPort != AppPort != SidecarPort; ignored if ProxyImage and/or TargetModule are/is not set)</td>
       <td>8000</td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment1Key</td>
-      <td>Environment variable 1 key for ambassador container</td>
+      <td>ProxyEnvironment1Key</td>
+      <td>Environment variable 1 key for proxy container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment1Value</td>
-      <td>Environment variable 1 value for ambassador container</td>
+      <td>ProxyEnvironment1Value</td>
+      <td>Environment variable 1 value for proxy container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment2Key</td>
-      <td>Environment variable 2 key for ambassador container</td>
+      <td>ProxyEnvironment2Key</td>
+      <td>Environment variable 2 key for proxy container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment2Value</td>
-      <td>Environment variable 2 value for ambassador container</td>
+      <td>ProxyEnvironment2Value</td>
+      <td>Environment variable 2 value for proxy container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment3Key</td>
-      <td>Environment variable 3 key for ambassador container</td>
+      <td>ProxyEnvironment3Key</td>
+      <td>Environment variable 3 key for proxy container</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AmbassadorEnvironment3Value</td>
-      <td>Environment variable 3 value for ambassador container</td>
+      <td>ProxyEnvironment3Value</td>
+      <td>Environment variable 3 value for proxy container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -208,7 +208,7 @@ Resources:
     </tr>
     <tr>
       <td>AppPort</td>
-      <td>The port exposed by the app container that receives traffic from the load balancer or the ambassador container (AppPort != AmbassadorPort != SidecarPort; ignored if TargetModule is not set)</td>
+      <td>The port exposed by the app container that receives traffic from the load balancer or the proxy container (AppPort != ProxyPort != SidecarPort; ignored if TargetModule is not set)</td>
       <td>80</td>
       <td>no</td>
       <td></td>
@@ -299,14 +299,14 @@ Resources:
     </tr>
     <tr>
       <td>SidecarImage</td>
-      <td>Docker image to use for the sidecar container (https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar). You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
+      <td>Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
       <td>SidecarPort</td>
-      <td>The port exposed by the sidecar container reachable from the app container on host localhost (SidecarPort != AmbassadorPort != AppPort)</td>
+      <td>The port exposed by the sidecar container reachable from the app container on host localhost (SidecarPort != ProxyPort != AppPort)</td>
       <td>9000</td>
       <td>no</td>
       <td></td>

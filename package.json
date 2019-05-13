@@ -1,7 +1,7 @@
 {
   "name": "@cfn-modules/fargate-service",
-  "version": "1.2.0",
-  "description": "Application load balancer.",
+  "version": "2.0.0",
+  "description": "ECS Service running on Fargate",
   "author": "Michael Wittig <michael@widdix.de>",
   "license": "Apache-2.0",
   "keywords": ["cfn-modules", "cfn-modules:ExposeArn", "cfn-modules:ExposeSecurityGroupId", "cfn-modules:ExposeDnsName"],
