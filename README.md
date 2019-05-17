@@ -74,6 +74,16 @@ Resources:
       TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'
 ```
 
+## Examples
+
+* [fargate-alb-ambassador-pattern](https://github.com/cfn-modules/docs/tree/master/examples/fargate-alb-ambassador-pattern)
+* [fargate-alb-single-container](https://github.com/cfn-modules/docs/tree/master/examples/fargate-alb-single-container)
+
+## Related modules
+
+* [alb](https://github.com/cfn-modules/alb)
+* [nlb](https://github.com/cfn-modules/nlb)
+
 ## Parameters
 
 <table>
