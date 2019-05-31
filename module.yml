@@ -16,12 +16,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: 'cfn-modules: Fargate service'
 # cfn-modules:implements()
 Parameters:
-  ClusterModule:
-    Description: 'Stack name of ecs-cluster module.'
-    Type: String
   VpcModule:
     Description: 'Stack name of vpc module.'
     Type: String
+  ClusterModule:
+    Description: 'Optional stack name of ecs-cluster module (if empty, an ECS cluster is created).'
+    Type: String
+    Default: ''
   TargetModule:
     Description: 'Optional stack name of module implementing Target.'
     Type: String
@@ -299,6 +300,8 @@ Mappings:
     '30':
       Memory: 30720
 Conditions:
+  HasNotClusterModule: !Equals [!Ref ClusterModule, '']
+  HasClusterModule: !Not [!Condition HasNotClusterModule]
   HasTargetModule: !Not [!Equals [!Ref TargetModule, '']]
   HasNotTargetModule: !Not [!Condition HasTargetModule]
   HasAlertingModule: !Not [!Equals [!Ref AlertingModule, '']]
@@ -323,6 +326,10 @@ Conditions:
   HasSidecarEnvironment2Key: !Not [!Equals [!Ref SidecarEnvironment2Key, '']]
   HasSidecarEnvironment3Key: !Not [!Equals [!Ref SidecarEnvironment3Key, '']]
 Resources:
+  Cluster:
+    Condition: HasNotClusterModule
+    Type: 'AWS::ECS::Cluster'
+    Properties: {}
   TaskExecutionRole:
     Type: 'AWS::IAM::Role'
     Properties:
@@ -437,7 +444,7 @@ Resources:
   Service:
     Type: 'AWS::ECS::Service'
     Properties:
-      Cluster: {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}
+      Cluster: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
       DeploymentConfiguration:
         MaximumPercent: 200
         MinimumHealthyPercent: 50
@@ -493,7 +500,7 @@ Resources:
       MinCapacity: !Ref MinCapacity
       ResourceId: !Sub
       - 'service/${Cluster}/${Service}'
-      - Cluster: {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}
+      - Cluster: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
         Service: !GetAtt 'Service.Name'
       RoleARN: !GetAtt 'ScalableTargetRole.Arn'
       ScalableDimension: 'ecs:service:DesiredCount'
@@ -534,7 +541,7 @@ Resources:
       Namespace: 'AWS/ECS'
       Dimensions:
       - Name: ClusterName
-        Value: {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}
+        Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
       - Name: ServiceName
         Value: !GetAtt 'Service.Name'
       MetricName: CPUUtilization
@@ -553,7 +560,7 @@ Resources:
       Namespace: 'AWS/ECS'
       Dimensions:
       - Name: ClusterName
-        Value: {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}
+        Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
       - Name: ServiceName
         Value: !GetAtt 'Service.Name'
       MetricName: CPUUtilization
@@ -572,7 +579,7 @@ Resources:
       Namespace: 'AWS/ECS'
       Dimensions:
       - Name: ClusterName
-        Value: {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}
+        Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
       - Name: ServiceName
         Value: !GetAtt 'Service.Name'
       MetricName: CPUUtilization
@@ -587,7 +594,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.0.0'
+    Value: '2.1.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:

@@ -24,8 +24,8 @@ Resources:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       Parameters:
-        ClusterModule: !GetAtt 'Cluster.Outputs.StackName' # required
         VpcModule: !GetAtt 'Vpc.Outputs.StackName' # required
+        ClusterModule: !GetAtt 'Cluster.Outputs.StackName' # optional
         TargetModule: '' # optional
         AlertingModule: '' # optional
         ClientSgModule1: '' # optional
@@ -98,17 +98,17 @@ Resources:
   </thead>
   <tbody>
     <tr>
-      <td>ClusterModule</td>
-      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/ecs-cluster">ecs-cluster module</a></td>
+      <td>VpcModule</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/vpc">vpc module</a></td>
       <td></td>
       <td>yes</td>
       <td></td>
     </tr>
     <tr>
-      <td>VpcModule</td>
-      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/vpc">vpc module</a></td>
+      <td>ClusterModule</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/ecs-cluster">ecs-cluster module</a> (if empty, an ECS cluster is created)</td>
       <td></td>
-      <td>yes</td>
+      <td>no</td>
       <td></td>
     </tr>
     <tr>
