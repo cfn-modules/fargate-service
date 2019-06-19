@@ -400,6 +400,11 @@ Resources:
             - 'logs:CreateLogStream'
             - 'logs:PutLogEvents'
             Resource: !GetAtt 'LogGroup.Arn'
+          - Effect: Allow
+            Action:
+            - 'kms:Decrypt'
+            - 'secretsmanager:GetSecretValue'
+            Resource: '*'
   TaskRole:
     Type: 'AWS::IAM::Role'
     Properties:
