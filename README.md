@@ -176,7 +176,14 @@ Resources:
     </tr>
     <tr>
       <td>ProxyEnvironment1Value</td>
-      <td>Environment variable 1 value for proxy container</td>
+      <td>Environment variable 1 plain-text value for proxy container (if ProxyEnvironment1Key is set, set either ProxyEnvironment1Value or ProxyEnvironment1SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ProxyEnvironment1SecretModule</td>
+      <td>Environment variable 1 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for proxy container (if ProxyEnvironment1Key is set, set either ProxyEnvironment1Value or ProxyEnvironment1SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -190,7 +197,14 @@ Resources:
     </tr>
     <tr>
       <td>ProxyEnvironment2Value</td>
-      <td>Environment variable 2 value for proxy container</td>
+      <td>Environment variable 2 plain-text value for proxy container (if ProxyEnvironment2Key is set, set either ProxyEnvironment2Value or ProxyEnvironment2SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ProxyEnvironment2SecretModule</td>
+      <td>Environment variable 2 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for proxy container (if ProxyEnvironment2Key is set, set either ProxyEnvironment2Value or ProxyEnvironment2SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -204,7 +218,14 @@ Resources:
     </tr>
     <tr>
       <td>ProxyEnvironment3Value</td>
-      <td>Environment variable 3 value for proxy container</td>
+      <td>Environment variable 3 plain-text value for proxy container (if ProxyEnvironment3Key is set, set either ProxyEnvironment3Value or ProxyEnvironment3SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ProxyEnvironment3SecretModule</td>
+      <td>Environment variable 3 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for proxy container (if ProxyEnvironment3Key is set, set either ProxyEnvironment3Value or ProxyEnvironment3SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -232,7 +253,14 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment1Value</td>
-      <td>Environment variable 1 value for app container</td>
+      <td>Environment variable 1 plain-text value for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment1SecretModule</td>
+      <td>Environment variable 1 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -246,7 +274,14 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment2Value</td>
-      <td>Environment variable 2 value for app container</td>
+      <td>Environment variable 2 plain-text value for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment2SecretModule</td>
+      <td>Environment variable 2 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -260,7 +295,14 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment3Value</td>
-      <td>Environment variable 3 value for app container</td>
+      <td>Environment variable 3 plain-text value for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment3SecretModule</td>
+      <td>Environment variable 3 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -274,7 +316,7 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment4Value</td>
-      <td>Environment variable 4 value for app container</td>
+      <td>Environment variable 4 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -288,7 +330,7 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment5Value</td>
-      <td>Environment variable 5 value for app container</td>
+      <td>Environment variable 5 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -302,7 +344,7 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment6Value</td>
-      <td>Environment variable 6 value for app container</td>
+      <td>Environment variable 6 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -330,7 +372,14 @@ Resources:
     </tr>
     <tr>
       <td>SidecarEnvironment1Value</td>
-      <td>Environment variable 1 value for sidecar container</td>
+      <td>Environment variable 1 plain-text value for sidecar container (if SidecarEnvironment1Key is set, set either SidecarEnvironment1Value or SidecarEnvironment1SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment1SecretModule</td>
+      <td>Environment variable 1 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment1Key is set, set either SidecarEnvironment1Value or SidecarEnvironment1SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -344,7 +393,14 @@ Resources:
     </tr>
     <tr>
       <td>SidecarEnvironment2Value</td>
-      <td>Environment variable 2 value for sidecar container</td>
+      <td>Environment variable 2 plain-text value for sidecar container (if SidecarEnvironment2Key is set, set either SidecarEnvironment2Value or SidecarEnvironment2SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment2SecretModule</td>
+      <td>Environment variable 2 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment2Key is set, set either SidecarEnvironment2Value or SidecarEnvironment2SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -358,7 +414,14 @@ Resources:
     </tr>
     <tr>
       <td>SidecarEnvironment3Value</td>
-      <td>Environment variable 3 value for sidecar container</td>
+      <td>Environment variable 3 plain-text value for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment3SecretModule</td>
+      <td>Environment variable 3 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -428,6 +491,46 @@ Resources:
     </tr>
   </tbody>
 </table>
+
+## Outputs
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Interface</th>
+      <th>Description</th>
+      <th>Exported?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ModuleId</td>
+      <td>global</td>
+      <td>Id of the module</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>ModuleVersion</td>
+      <td>global</td>
+      <td>Version of the module</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>StackName</td>
+      <td>global</td>
+      <td>Name of the stack (used to pass module references)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>TaskRoleArn</td>
+      <td></td>
+      <td>IAM Role ARN of task</td>
+      <td>yes</td>
+    </tr>
+  </tbody>
+</table>
+
 
 ## Migration Guides
 

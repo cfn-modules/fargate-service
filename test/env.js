@@ -1,10 +1,10 @@
 const test = require('ava');
 const cfntest = require('@cfn-modules/test');
 
-test.serial('defaults', async t => {
+test.serial('plain text', async t => {
   const stackName = cfntest.stackName();
   try {
-    t.log(await cfntest.createStack(`${__dirname}/defaults.yml`, stackName, {}));
+    t.log(await cfntest.createStack(`${__dirname}/env-plain-text.yml`, stackName, {}));
     // what could we test here?
   } finally {
     t.log(await cfntest.deleteStack(stackName));
@@ -12,10 +12,10 @@ test.serial('defaults', async t => {
   }
 });
 
-test.serial('cluster', async t => {
+test.serial('secret', async t => {
   const stackName = cfntest.stackName();
   try {
-    t.log(await cfntest.createStack(`${__dirname}/cluster.yml`, stackName, {}));
+    t.log(await cfntest.createStack(`${__dirname}/env-secret.yml`, stackName, {}));
     // what could we test here?
   } finally {
     t.log(await cfntest.deleteStack(stackName));
