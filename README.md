@@ -36,18 +36,24 @@ Resources:
         ProxyPort: '8000' # optional
         ProxyEnvironment1Key: '' # optional
         ProxyEnvironment1Value: '' # optional
+        ProxyEnvironment1SecretModule: '' # optional
         ProxyEnvironment2Key: '' # optional
         ProxyEnvironment2Value: '' # optional
+        ProxyEnvironment2SecretModule: '' # optional
         ProxyEnvironment3Key: '' # optional
         ProxyEnvironment3Value: '' # optional
+        ProxyEnvironment3SecretModule: '' # optional
         AppImage: 'widdix/hello:v1' # optional
         AppPort: '80' # optional
         AppEnvironment1Key: '' # optional
         AppEnvironment1Value: '' # optional
+        AppEnvironment1SecretModule: '' # optional
         AppEnvironment2Key: '' # optional
         AppEnvironment2Value: '' # optional
+        AppEnvironment2SecretModule: '' # optional
         AppEnvironment3Key: '' # optional
         AppEnvironment3Value: '' # optional
+        AppEnvironment3SecretModule: '' # optional
         AppEnvironment4Key: '' # optional
         AppEnvironment4Value: '' # optional
         AppEnvironment5Key: '' # optional
@@ -58,10 +64,13 @@ Resources:
         SidecarPort: '9000' # optional
         SidecarEnvironment1Key: '' # optional
         SidecarEnvironment1Value: '' # optional
+        SidecarEnvironment1SecretModule: '' # optional
         SidecarEnvironment2Key: '' # optional
         SidecarEnvironment2Value: '' # optional
+        SidecarEnvironment2SecretModule: '' # optional
         SidecarEnvironment3Key: '' # optional
         SidecarEnvironment3Value: '' # optional
+        SidecarEnvironment3SecretModule: '' # optional
         Cpu: '0.25' # optional
         Memory: '0.5' # optional
         DesiredCount: '2' # optional
