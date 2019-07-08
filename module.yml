@@ -62,7 +62,11 @@ Parameters:
     Type: String
     Default: ''
   ProxyEnvironment1Value:
-    Description: 'Optional environment variable 1 value for proxy container.'
+    Description: 'Optional environment variable 1 plain-text value for proxy container (if ProxyEnvironment1Key is set, set either ProxyEnvironment1Value or ProxyEnvironment1SecretModule).'
+    Type: String
+    Default: ''
+  ProxyEnvironment1SecretModule:
+    Description: 'Optional environment variable 1 stack name of secret module for proxy container (if ProxyEnvironment1Key is set, set either ProxyEnvironment1Value or ProxyEnvironment1SecretModule).'
     Type: String
     Default: ''
   ProxyEnvironment2Key:
@@ -70,7 +74,11 @@ Parameters:
     Type: String
     Default: ''
   ProxyEnvironment2Value:
-    Description: 'Optional environment variable 2 value for proxy container.'
+    Description: 'Optional environment variable 2 plain-text value for proxy container (if ProxyEnvironment2Key is set, set either ProxyEnvironment2Value or ProxyEnvironment2SecretModule).'
+    Type: String
+    Default: ''
+  ProxyEnvironment2SecretModule:
+    Description: 'Optional environment variable 2 stack name of secret module for proxy container (if ProxyEnvironment2Key is set, set either ProxyEnvironment2Value or ProxyEnvironment2SecretModule).'
     Type: String
     Default: ''
   ProxyEnvironment3Key:
@@ -78,7 +86,11 @@ Parameters:
     Type: String
     Default: ''
   ProxyEnvironment3Value:
-    Description: 'Optional environment variable 3 value for proxy container.'
+    Description: 'Optional environment variable 3 plain-text value for proxy container (if ProxyEnvironment3Key is set, set either ProxyEnvironment3Value or ProxyEnvironment3SecretModule).'
+    Type: String
+    Default: ''
+  ProxyEnvironment3SecretModule:
+    Description: 'Optional environment variable 3 stack name of secret module for proxy container (if ProxyEnvironment3Key is set, set either ProxyEnvironment3Value or ProxyEnvironment3SecretModule).'
     Type: String
     Default: ''
   AppImage:
@@ -96,7 +108,11 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment1Value:
-    Description: 'Optional environment variable 1 value for app container.'
+    Description: 'Optional environment variable 1 plain-text value for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment1SecretModule:
+    Description: 'Optional environment variable 1 stack name of secret module for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule).'
     Type: String
     Default: ''
   AppEnvironment2Key:
@@ -104,7 +120,11 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment2Value:
-    Description: 'Optional environment variable 2 value for app container.'
+    Description: 'Optional environment variable 2 plain-text value for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment2SecretModule:
+    Description: 'Optional environment variable 2 stack name of secret module for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule).'
     Type: String
     Default: ''
   AppEnvironment3Key:
@@ -112,7 +132,11 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment3Value:
-    Description: 'Optional environment variable 3 value for app container.'
+    Description: 'Optional environment variable 3 plain-text value for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment3SecretModule:
+    Description: 'Optional environment variable 3 stack name of secret module for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule).'
     Type: String
     Default: ''
   AppEnvironment4Key:
@@ -120,7 +144,7 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment4Value:
-    Description: 'Optional environment variable 4 value for app container.'
+    Description: 'Optional environment variable 4 plain-text value for app container.'
     Type: String
     Default: ''
   AppEnvironment5Key:
@@ -128,7 +152,7 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment5Value:
-    Description: 'Optional environment variable 5 value for app container.'
+    Description: 'Optional environment variable 5 plain-text value for app container.'
     Type: String
     Default: ''
   AppEnvironment6Key:
@@ -136,7 +160,7 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment6Value:
-    Description: 'Optional environment variable 6 value for app container.'
+    Description: 'Optional environment variable 6 plain-text value for app container.'
     Type: String
     Default: ''
   SidecarImage:
@@ -154,7 +178,11 @@ Parameters:
     Type: String
     Default: ''
   SidecarEnvironment1Value:
-    Description: 'Optional environment variable 1 value for sidecar container.'
+    Description: 'Optional environment variable 1 plain-text value for sidecar container (if SidecarEnvironment1Key is set, set either SidecarEnvironment1Value or SidecarEnvironment1SecretModule).'
+    Type: String
+    Default: ''
+  SidecarEnvironment1SecretModule:
+    Description: 'Optional environment variable 1 stack name of secret module for sidecar container (if SidecarEnvironment1Key is set, set either SidecarEnvironment1Value or SidecarEnvironment1SecretModule).'
     Type: String
     Default: ''
   SidecarEnvironment2Key:
@@ -162,7 +190,11 @@ Parameters:
     Type: String
     Default: ''
   SidecarEnvironment2Value:
-    Description: 'Optional environment variable 2 value for sidecar container.'
+    Description: 'Optional environment variable 2 plain-text value for sidecar container (if SidecarEnvironment2Key is set, set either SidecarEnvironment2Value or SidecarEnvironment2SecretModule).'
+    Type: String
+    Default: ''
+  SidecarEnvironment2SecretModule:
+    Description: 'Optional environment variable 2 stack name of secret module for sidecar container (if SidecarEnvironment2Key is set, set either SidecarEnvironment2Value or SidecarEnvironment2SecretModule).'
     Type: String
     Default: ''
   SidecarEnvironment3Key:
@@ -170,7 +202,11 @@ Parameters:
     Type: String
     Default: ''
   SidecarEnvironment3Value:
-    Description: 'Optional environment variable 3 value for sidecar container.'
+    Description: 'Optional environment variable 3 plain-text value for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule).'
+    Type: String
+    Default: ''
+  SidecarEnvironment3SecretModule:
+    Description: 'Optional environment variable 3 stack name of secret module for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule).'
     Type: String
     Default: ''
   Cpu:
@@ -311,20 +347,29 @@ Conditions:
   HasSubnetsReachPublic: !Equals [!Ref SubnetsReach, Public]
   HasAutoScaling: !Equals [!Ref AutoScaling, 'true']
   HasManagedPolicyArns: !Not [!Equals [!Ref ManagedPolicyArns, '']]
-  HasAppEnvironment1Key: !Not [!Equals [!Ref AppEnvironment1Key, '']]
-  HasAppEnvironment2Key: !Not [!Equals [!Ref AppEnvironment2Key, '']]
-  HasAppEnvironment3Key: !Not [!Equals [!Ref AppEnvironment3Key, '']]
-  HasAppEnvironment4Key: !Not [!Equals [!Ref AppEnvironment4Key, '']]
-  HasAppEnvironment5Key: !Not [!Equals [!Ref AppEnvironment5Key, '']]
-  HasAppEnvironment6Key: !Not [!Equals [!Ref AppEnvironment6Key, '']]
+  HasAppEnvironment1PlainText: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Equals [!Ref AppEnvironment1SecretModule, '']]
+  HasAppEnvironment2PlainText: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Equals [!Ref AppEnvironment2SecretModule, '']]
+  HasAppEnvironment3PlainText: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Equals [!Ref AppEnvironment3SecretModule, '']]
+  HasAppEnvironment4PlainText: !Not [!Equals [!Ref AppEnvironment4Key, '']]
+  HasAppEnvironment5PlainText: !Not [!Equals [!Ref AppEnvironment5Key, '']]
+  HasAppEnvironment6PlainText: !Not [!Equals [!Ref AppEnvironment6Key, '']]
+  HasAppEnvironment1Secret: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Not [!Equals [!Ref AppEnvironment1SecretModule, '']]]
+  HasAppEnvironment2Secret: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Not [!Equals [!Ref AppEnvironment2SecretModule, '']]]
+  HasAppEnvironment3Secret: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Not [!Equals [!Ref AppEnvironment3SecretModule, '']]]
   HasProxyImage: !Not [!Equals [!Ref ProxyImage, '']]
-  HasProxyEnvironment1Key: !Not [!Equals [!Ref ProxyEnvironment1Key, '']]
-  HasProxyEnvironment2Key: !Not [!Equals [!Ref ProxyEnvironment2Key, '']]
-  HasProxyEnvironment3Key: !Not [!Equals [!Ref ProxyEnvironment3Key, '']]
+  HasProxyEnvironment1PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment1Key, '']], !Equals [!Ref ProxyEnvironment1SecretModule, '']]
+  HasProxyEnvironment2PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment2Key, '']], !Equals [!Ref ProxyEnvironment2SecretModule, '']]
+  HasProxyEnvironment3PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment3Key, '']], !Equals [!Ref ProxyEnvironment3SecretModule, '']]
+  HasProxyEnvironment1Secret: !And [!Not [!Equals [!Ref ProxyEnvironment1Key, '']], !Not [!Equals [!Ref ProxyEnvironment1SecretModule, '']]]
+  HasProxyEnvironment2Secret: !And [!Not [!Equals [!Ref ProxyEnvironment2Key, '']], !Not [!Equals [!Ref ProxyEnvironment2SecretModule, '']]]
+  HasProxyEnvironment3Secret: !And [!Not [!Equals [!Ref ProxyEnvironment3Key, '']], !Not [!Equals [!Ref ProxyEnvironment3SecretModule, '']]]
   HasSidecarImage: !Not [!Equals [!Ref SidecarImage, '']]
-  HasSidecarEnvironment1Key: !Not [!Equals [!Ref SidecarEnvironment1Key, '']]
-  HasSidecarEnvironment2Key: !Not [!Equals [!Ref SidecarEnvironment2Key, '']]
-  HasSidecarEnvironment3Key: !Not [!Equals [!Ref SidecarEnvironment3Key, '']]
+  HasSidecarEnvironment1PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment1Key, '']], !Equals [!Ref SidecarEnvironment1SecretModule, '']]
+  HasSidecarEnvironment2PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment2Key, '']], !Equals [!Ref SidecarEnvironment2SecretModule, '']]
+  HasSidecarEnvironment3PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment3Key, '']], !Equals [!Ref SidecarEnvironment3SecretModule, '']]
+  HasSidecarEnvironment1Secret: !And [!Not [!Equals [!Ref SidecarEnvironment1Key, '']], !Not [!Equals [!Ref SidecarEnvironment1SecretModule, '']]]
+  HasSidecarEnvironment2Secret: !And [!Not [!Equals [!Ref SidecarEnvironment2Key, '']], !Not [!Equals [!Ref SidecarEnvironment2SecretModule, '']]]
+  HasSidecarEnvironment3Secret: !And [!Not [!Equals [!Ref SidecarEnvironment3Key, '']], !Not [!Equals [!Ref SidecarEnvironment3SecretModule, '']]]
 Resources:
   Cluster:
     Condition: HasNotClusterModule
@@ -355,6 +400,11 @@ Resources:
             - 'logs:CreateLogStream'
             - 'logs:PutLogEvents'
             Resource: !GetAtt 'LogGroup.Arn'
+          - Effect: Allow
+            Action:
+            - 'kms:Decrypt'
+            - 'secretsmanager:GetSecretValue'
+            Resource: '*'
   TaskRole:
     Type: 'AWS::IAM::Role'
     Properties:
@@ -383,9 +433,13 @@ Resources:
               'awslogs-group': !Ref LogGroup
               'awslogs-stream-prefix': proxy
           Environment:
-          - !If [HasProxyEnvironment1Key, {Name: !Ref ProxyEnvironment1Key, Value: !Ref ProxyEnvironment1Value}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment2Key, {Name: !Ref ProxyEnvironment2Key, Value: !Ref ProxyEnvironment2Value}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment3Key, {Name: !Ref ProxyEnvironment3Key, Value: !Ref ProxyEnvironment3Value}, !Ref 'AWS::NoValue']
+          - !If [HasProxyEnvironment1PlainText, {Name: !Ref ProxyEnvironment1Key, Value: !Ref ProxyEnvironment1Value}, !Ref 'AWS::NoValue']
+          - !If [HasProxyEnvironment2PlainText, {Name: !Ref ProxyEnvironment2Key, Value: !Ref ProxyEnvironment2Value}, !Ref 'AWS::NoValue']
+          - !If [HasProxyEnvironment3PlainText, {Name: !Ref ProxyEnvironment3Key, Value: !Ref ProxyEnvironment3Value}, !Ref 'AWS::NoValue']
+          Secrets:
+          - !If [HasProxyEnvironment1Secret, {Name: !Ref ProxyEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          - !If [HasProxyEnvironment2Secret, {Name: !Ref ProxyEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          - !If [HasProxyEnvironment3Secret, {Name: !Ref ProxyEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !Ref 'AWS::NoValue'
       - Name: app
         Image: !Ref AppImage
@@ -399,12 +453,16 @@ Resources:
             'awslogs-group': !Ref LogGroup
             'awslogs-stream-prefix': app
         Environment:
-        - !If [HasAppEnvironment1Key, {Name: !Ref AppEnvironment1Key, Value: !Ref AppEnvironment1Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment2Key, {Name: !Ref AppEnvironment2Key, Value: !Ref AppEnvironment2Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment3Key, {Name: !Ref AppEnvironment3Key, Value: !Ref AppEnvironment3Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment4Key, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment5Key, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment6Key, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment1PlainText, {Name: !Ref AppEnvironment1Key, Value: !Ref AppEnvironment1Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment2PlainText, {Name: !Ref AppEnvironment2Key, Value: !Ref AppEnvironment2Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment3PlainText, {Name: !Ref AppEnvironment3Key, Value: !Ref AppEnvironment3Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment4PlainText, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment5PlainText, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment6PlainText, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
+        Secrets:
+        - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment3Secret, {Name: !Ref AppEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
       - !If
         - HasSidecarImage
         - Name: sidecar
@@ -420,9 +478,13 @@ Resources:
               'awslogs-group': !Ref LogGroup
               'awslogs-stream-prefix': sidecar
           Environment:
-          - !If [HasSidecarEnvironment1Key, {Name: !Ref SidecarEnvironment1Key, Value: !Ref SidecarEnvironment1Value}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment2Key, {Name: !Ref SidecarEnvironment2Key, Value: !Ref SidecarEnvironment2Value}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment3Key, {Name: !Ref SidecarEnvironment3Key, Value: !Ref SidecarEnvironment3Value}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment1PlainText, {Name: !Ref SidecarEnvironment1Key, Value: !Ref SidecarEnvironment1Value}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment2PlainText, {Name: !Ref SidecarEnvironment2Key, Value: !Ref SidecarEnvironment2Value}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment3PlainText, {Name: !Ref SidecarEnvironment3Key, Value: !Ref SidecarEnvironment3Value}, !Ref 'AWS::NoValue']
+          Secrets:
+          - !If [HasSidecarEnvironment1Secret, {Name: !Ref SidecarEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment2Secret, {Name: !Ref SidecarEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          - !If [HasSidecarEnvironment3Secret, {Name: !Ref SidecarEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !Ref 'AWS::NoValue'
       Cpu: !FindInMap [CpuMap, !Ref Cpu, Cpu]
       ExecutionRoleArn: !GetAtt 'TaskExecutionRole.Arn'
@@ -594,7 +656,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.1.0'
+    Value: '2.2.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
