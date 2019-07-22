@@ -663,3 +663,11 @@ Outputs:
     Value: !GetAtt 'TaskRole.Arn'
     Export:
       Name: !Sub '${AWS::StackName}-TaskRoleArn'
+  ServiceName:
+    Value: !GetAtt 'Service.Name'
+    Export:
+      Name: !Sub '${AWS::StackName}-ServiceName'
+  ClusterName:
+    Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
+    Export:
+      Name: !Sub '${AWS::StackName}-ClusterName'
