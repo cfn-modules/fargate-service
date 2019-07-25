@@ -45,21 +45,7 @@ Resources:
         ProxyEnvironment3SecretModule: '' # optional
         AppImage: 'widdix/hello:v1' # optional
         AppPort: '80' # optional
-        AppEnvironment1Key: '' # optional
-        AppEnvironment1Value: '' # optional
-        AppEnvironment1SecretModule: '' # optional
-        AppEnvironment2Key: '' # optional
-        AppEnvironment2Value: '' # optional
-        AppEnvironment2SecretModule: '' # optional
-        AppEnvironment3Key: '' # optional
-        AppEnvironment3Value: '' # optional
-        AppEnvironment3SecretModule: '' # optional
-        AppEnvironment4Key: '' # optional
-        AppEnvironment4Value: '' # optional
-        AppEnvironment5Key: '' # optional
-        AppEnvironment5Value: '' # optional
-        AppEnvironment6Key: '' # optional
-        AppEnvironment6Value: '' # optional
+        AppEnvironmentVariables: 'Key1=Value1,Key2=Value2' # optional
         SidecarImage: '' # optional
         SidecarPort: '9000' # optional
         SidecarEnvironment1Key: '' # optional
@@ -254,106 +240,15 @@ Resources:
       <td></td>
     </tr>
     <tr>
-      <td>AppEnvironment1Key</td>
-      <td>Environment variable 1 key for app container</td>
+      <td>AppEnvironmentVariables</td>
+      <td>A CommaDelimitedList of up to 10 key value pairs to be used as environment variables within the tasks</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
-      <td>AppEnvironment1Value</td>
-      <td>Environment variable 1 plain-text value for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule)</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment1SecretModule</td>
-      <td>Environment variable 1 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule)</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment2Key</td>
-      <td>Environment variable 2 key for app container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment2Value</td>
-      <td>Environment variable 2 plain-text value for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule)</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment2SecretModule</td>
-      <td>Environment variable 2 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule)</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment3Key</td>
-      <td>Environment variable 3 key for app container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment3Value</td>
-      <td>Environment variable 3 plain-text value for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule)</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment3SecretModule</td>
-      <td>Environment variable 3 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule)</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment4Key</td>
-      <td>Environment variable 4 key for app container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment4Value</td>
-      <td>Environment variable 4 plain-text value for app container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment5Key</td>
-      <td>Environment variable 5 key for app container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment5Value</td>
-      <td>Environment variable 5 plain-text value for app container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment6Key</td>
-      <td>Environment variable 6 key for app container</td>
-      <td></td>
-      <td>no</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>AppEnvironment6Value</td>
-      <td>Environment variable 6 plain-text value for app container</td>
+      <td>AppSecretVariables</td>
+      <td>A CommaDelimitedList of up to 10 key value pairs to be used as environment variables within the tasks. The values should be the stack name of a Secret module.</td>
       <td></td>
       <td>no</td>
       <td></td>

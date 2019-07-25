@@ -16,6 +16,5 @@ Resources:
     Properties:
       Parameters:
         VpcModule: !GetAtt 'Vpc.Outputs.StackName'
-        AppEnvironment1Key: 'TEST'
-        AppEnvironment1Value: 'VALUE'
+        AppEnvironmentVariables: 'key1=This is a value,key2=This is another value'
       TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'
