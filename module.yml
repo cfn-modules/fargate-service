@@ -104,13 +104,73 @@ Parameters:
     MinValue: 1
     MaxValue: 49150
   AppEnvironmentVariables:
-    Description: 'An optional CommaDelimitedList of up to 10 Environment Variables in the form Key1=Value1,Key2=Value2'
-    Type: CommaDelimitedList
+    Description: 'An optional string representation of a list of environment variables. Each key value pair is separated by ,, and each key and value by ==. eg. "key1==value1,,key2==value2"'
+    Type: String
     Default: 'END_MARKER'
   AppSecretVariables:
     Description: 'An optional CommaDelimitedList of up to 10 Environment Variables with the value the name of a secret module. Eg. Key1=SecretModuleName'
     Type: CommaDelimitedList
     Default: 'END_MARKER'
+  AppEnvironment1Key:
+    Description: 'Optional environment variable 1 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment1Value:
+    Description: 'Optional environment variable 1 plain-text value for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment1SecretModule:
+    Description: 'Optional environment variable 1 stack name of secret module for app container (if AppEnvironment1Key is set, set either AppEnvironment1Value or AppEnvironment1SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment2Key:
+    Description: 'Optional environment variable 2 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment2Value:
+    Description: 'Optional environment variable 2 plain-text value for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment2SecretModule:
+    Description: 'Optional environment variable 2 stack name of secret module for app container (if AppEnvironment2Key is set, set either AppEnvironment2Value or AppEnvironment2SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment3Key:
+    Description: 'Optional environment variable 3 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment3Value:
+    Description: 'Optional environment variable 3 plain-text value for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment3SecretModule:
+    Description: 'Optional environment variable 3 stack name of secret module for app container (if AppEnvironment3Key is set, set either AppEnvironment3Value or AppEnvironment3SecretModule).'
+    Type: String
+    Default: ''
+  AppEnvironment4Key:
+    Description: 'Optional environment variable 4 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment4Value:
+    Description: 'Optional environment variable 4 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment5Key:
+    Description: 'Optional environment variable 5 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment5Value:
+    Description: 'Optional environment variable 5 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment6Key:
+    Description: 'Optional environment variable 6 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment6Value:
+    Description: 'Optional environment variable 6 plain-text value for app container.'
+    Type: String
+    Default: ''
   SidecarImage:
     Description: 'Optional Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
     Type: String
@@ -295,16 +355,16 @@ Conditions:
   HasSubnetsReachPublic: !Equals [!Ref SubnetsReach, Public]
   HasAutoScaling: !Equals [!Ref AutoScaling, 'true']
   HasManagedPolicyArns: !Not [!Equals [!Ref ManagedPolicyArns, '']]
-  HasAppEnvironment1: !Not [!Equals [!Select [0, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment2: !Not [!Equals [!Select [1, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment3: !Not [!Equals [!Select [2, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment4: !Not [!Equals [!Select [3, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment5: !Not [!Equals [!Select [4, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment6: !Not [!Equals [!Select [5, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment7: !Not [!Equals [!Select [6, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment8: !Not [!Equals [!Select [7, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment9: !Not [!Equals [!Select [8, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
-  HasAppEnvironment10: !Not [!Equals [!Select [9, !Split [',', !Sub ["${AppEnvironmentVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppEnvironmentVariables: !Join [',', !Ref AppEnvironmentVariables]}]]], 'END_MARKER']]
+  HasAppEnvironment1: !Not [!Equals [!Select [0, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment2: !Not [!Equals [!Select [1, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment3: !Not [!Equals [!Select [2, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment4: !Not [!Equals [!Select [3, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment5: !Not [!Equals [!Select [4, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment6: !Not [!Equals [!Select [5, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment7: !Not [!Equals [!Select [6, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment8: !Not [!Equals [!Select [7, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment9: !Not [!Equals [!Select [8, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
+  HasAppEnvironment10: !Not [!Equals [!Select [9, !Split [',,', !Sub "${AppEnvironmentVariables},,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER,,END_MARKER"]], 'END_MARKER']]
   HasAppSecret1: !Not [!Equals [!Select [0, !Split [',', !Sub ["${AppSecretVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppSecretVariables: !Join [',', !Ref AppSecretVariables]}]]], 'END_MARKER']]
   HasAppSecret2: !Not [!Equals [!Select [1, !Split [',', !Sub ["${AppSecretVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppSecretVariables: !Join [',', !Ref AppSecretVariables]}]]], 'END_MARKER']]
   HasAppSecret3: !Not [!Equals [!Select [2, !Split [',', !Sub ["${AppSecretVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppSecretVariables: !Join [',', !Ref AppSecretVariables]}]]], 'END_MARKER']]
@@ -315,6 +375,15 @@ Conditions:
   HasAppSecret8: !Not [!Equals [!Select [7, !Split [',', !Sub ["${AppSecretVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppSecretVariables: !Join [',', !Ref AppSecretVariables]}]]], 'END_MARKER']]
   HasAppSecret9: !Not [!Equals [!Select [8, !Split [',', !Sub ["${AppSecretVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppSecretVariables: !Join [',', !Ref AppSecretVariables]}]]], 'END_MARKER']]
   HasAppSecret10: !Not [!Equals [!Select [9, !Split [',', !Sub ["${AppSecretVariables},END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER,END_MARKER", {AppSecretVariables: !Join [',', !Ref AppSecretVariables]}]]], 'END_MARKER']]
+  HasAppEnvironment1PlainText: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Equals [!Ref AppEnvironment1SecretModule, '']]
+  HasAppEnvironment2PlainText: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Equals [!Ref AppEnvironment2SecretModule, '']]
+  HasAppEnvironment3PlainText: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Equals [!Ref AppEnvironment3SecretModule, '']]
+  HasAppEnvironment4PlainText: !Not [!Equals [!Ref AppEnvironment4Key, '']]
+  HasAppEnvironment5PlainText: !Not [!Equals [!Ref AppEnvironment5Key, '']]
+  HasAppEnvironment6PlainText: !Not [!Equals [!Ref AppEnvironment6Key, '']]
+  HasAppEnvironment1Secret: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Not [!Equals [!Ref AppEnvironment1SecretModule, '']]]
+  HasAppEnvironment2Secret: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Not [!Equals [!Ref AppEnvironment2SecretModule, '']]]
+  HasAppEnvironment3Secret: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Not [!Equals [!Ref AppEnvironment3SecretModule, '']]]
   HasProxyImage: !Not [!Equals [!Ref ProxyImage, '']]
   HasProxyEnvironment1PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment1Key, '']], !Equals [!Ref ProxyEnvironment1SecretModule, '']]
   HasProxyEnvironment2PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment2Key, '']], !Equals [!Ref ProxyEnvironment2SecretModule, '']]
@@ -412,16 +481,22 @@ Resources:
             'awslogs-group': !Ref LogGroup
             'awslogs-stream-prefix': app
         Environment:
-        - !If [HasAppEnvironment1, {Name: !Select [0, !Split ['=', !Select [0, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [0, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment2, {Name: !Select [0, !Split ['=', !Select [1, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [1, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment3, {Name: !Select [0, !Split ['=', !Select [2, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [2, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment4, {Name: !Select [0, !Split ['=', !Select [3, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [3, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment5, {Name: !Select [0, !Split ['=', !Select [4, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [4, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment6, {Name: !Select [0, !Split ['=', !Select [5, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [5, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment7, {Name: !Select [0, !Split ['=', !Select [6, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [6, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment8, {Name: !Select [0, !Split ['=', !Select [7, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [7, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment9, {Name: !Select [0, !Split ['=', !Select [8, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [8, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment10, {Name: !Select [0, !Split ['=', !Select [9, !Ref AppEnvironmentVariables]]], Value: !Select [1, !Split ['=', !Select [9, !Ref AppEnvironmentVariables]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment1, {Name: !Select [0, !Split ['==', !Select [0, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [0, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment2, {Name: !Select [0, !Split ['==', !Select [1, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [1, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment3, {Name: !Select [0, !Split ['==', !Select [2, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [2, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment4, {Name: !Select [0, !Split ['==', !Select [3, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [3, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment5, {Name: !Select [0, !Split ['==', !Select [4, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [4, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment6, {Name: !Select [0, !Split ['==', !Select [5, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [5, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment7, {Name: !Select [0, !Split ['==', !Select [6, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [6, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment8, {Name: !Select [0, !Split ['==', !Select [7, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [7, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment9, {Name: !Select [0, !Split ['==', !Select [8, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [8, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment10, {Name: !Select [0, !Split ['==', !Select [9, !Split [',,', !Ref AppEnvironmentVariables]]]], Value: !Select [1, !Split ['==', !Select [9, !Split [',,', !Ref AppEnvironmentVariables]]]]}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment1PlainText, {Name: !Ref AppEnvironment1Key, Value: !Ref AppEnvironment1Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment2PlainText, {Name: !Ref AppEnvironment2Key, Value: !Ref AppEnvironment2Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment3PlainText, {Name: !Ref AppEnvironment3Key, Value: !Ref AppEnvironment3Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment4PlainText, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment5PlainText, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment6PlainText, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
         Secrets:
         - !If [HasAppSecret1, {Name: !Select [0, !Split ['=', !Select [0, !Ref AppSecretVariables]]], ValueFrom: {'Fn::ImportValue': {'Fn::Sub': ["${StackName}-Arn", {StackName: !Select [1, !Split ['=', !Select [0, !Ref AppSecretVariables]]]}]}}}, !Ref 'AWS::NoValue']
         - !If [HasAppSecret2, {Name: !Select [0, !Split ['=', !Select [1, !Ref AppSecretVariables]]], ValueFrom: {'Fn::ImportValue': {'Fn::Sub': ["${StackName}-Arn", {StackName: !Select [1, !Split ['=', !Select [1, !Ref AppSecretVariables]]]}]}}}, !Ref 'AWS::NoValue']
@@ -433,6 +508,9 @@ Resources:
         - !If [HasAppSecret8, {Name: !Select [0, !Split ['=', !Select [7, !Ref AppSecretVariables]]], ValueFrom: {'Fn::ImportValue': {'Fn::Sub': ["${StackName}-Arn", {StackName: !Select [1, !Split ['=', !Select [7, !Ref AppSecretVariables]]]}]}}}, !Ref 'AWS::NoValue']
         - !If [HasAppSecret9, {Name: !Select [0, !Split ['=', !Select [8, !Ref AppSecretVariables]]], ValueFrom: {'Fn::ImportValue': {'Fn::Sub': ["${StackName}-Arn", {StackName: !Select [1, !Split ['=', !Select [8, !Ref AppSecretVariables]]]}]}}}, !Ref 'AWS::NoValue']
         - !If [HasAppSecret10, {Name: !Select [0, !Split ['=', !Select [9, !Ref AppSecretVariables]]], ValueFrom: {'Fn::ImportValue': {'Fn::Sub': ["${StackName}-Arn", {StackName: !Select [1, !Split ['=', !Select [9, !Ref AppSecretVariables]]]}]}}}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment3Secret, {Name: !Ref AppEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
       - !If
         - HasSidecarImage
         - Name: sidecar
