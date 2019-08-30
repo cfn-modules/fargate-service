@@ -400,11 +400,69 @@ Resources:
             - 'logs:CreateLogStream'
             - 'logs:PutLogEvents'
             Resource: !GetAtt 'LogGroup.Arn'
-          - Effect: Allow
-            Action:
-            - 'kms:Decrypt'
-            - 'secretsmanager:GetSecretValue'
-            Resource: '*'
+          - !If
+            - HasAppEnvironment1Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasAppEnvironment2Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasAppEnvironment3Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasProxyEnvironment1Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasProxyEnvironment2Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasProxyEnvironment3Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasSidecarEnvironment1Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasSidecarEnvironment2Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasSidecarEnvironment3Secret
+            - Effect: Allow
+              Action:
+              - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
   TaskRole:
     Type: 'AWS::IAM::Role'
     Properties:
@@ -656,7 +714,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.4.0'
+    Value: '2.5.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
