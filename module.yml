@@ -583,6 +583,25 @@ Resources:
           - !If [HasClientSgModule3, {'Fn::ImportValue': !Sub '${ClientSgModule3}-SecurityGroupId'}, !Ref 'AWS::NoValue']
           Subnets: !Split [',', {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIds${SubnetsReach}'}]
       TaskDefinition: !Ref TaskDefinition
+  ServiceFailedNotification:
+    Condition: HasAlertingModule
+    Type: 'AWS::Events::Rule'
+    Properties:
+      EventPattern:
+        source:
+        - 'aws.ec2'
+        'detail-type':
+        - 'ECS Service Action'
+        resources:
+        - !Ref Service
+        detail:
+          eventType:
+          - ERROR
+          - WARN
+      State: ENABLED
+      Targets:
+      - Arn: {'Fn::ImportValue': !Sub '${AlertingModule}-Arn'}
+        Id: rule
   ScalableTargetRole: # based on http://docs.aws.amazon.com/AmazonECS/latest/developerguide/autoscale_IAM_role.html
     Condition: HasAutoScaling
     Type: 'AWS::IAM::Role'
@@ -714,7 +733,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.5.0'
+    Value: '2.6.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
