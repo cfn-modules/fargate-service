@@ -100,7 +100,7 @@ Parameters:
   AppImage:
     Description: 'The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set AppImageSecretModule as well!'
     Type: String
-    Default: 'widdix/hello:v1' 
+    Default: 'widdix/hello:v1'
   AppImageSecretModule:
     Description: 'Optional stack name of secret module which contains the repository credentials for private registry authentication.'
     Type: String
@@ -174,7 +174,7 @@ Parameters:
   SidecarImage:
     Description: 'Optional Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set SidecarImageSecretModule as well!'
     Type: String
-    Default: '' 
+    Default: ''
   SidecarImageSecretModule:
     Description: 'Optional stack name of secret module which contains the repository credentials for private registry authentication.'
     Type: String
