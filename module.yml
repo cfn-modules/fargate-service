@@ -48,7 +48,11 @@ Parameters:
     Type: String
     Default: ''
   ProxyImage:
-    Description: 'Optional Docker image to use for the proxy container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
+    Description: 'Optional Docker image to use for the proxy container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set ProxyyImageSecretModule as well!'
+    Type: String
+    Default: ''
+  ProxyImageSecretModule:
+    Description: 'Optional stack name of secret module which contains the repository credentials for private registry authentication.'
     Type: String
     Default: ''
   ProxyPort:
@@ -94,9 +98,13 @@ Parameters:
     Type: String
     Default: ''
   AppImage:
-    Description: 'The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
+    Description: 'The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set AppImageSecretModule as well!'
     Type: String
     Default: 'widdix/hello:v1'
+  AppImageSecretModule:
+    Description: 'Optional stack name of secret module which contains the repository credentials for private registry authentication.'
+    Type: String
+    Default: ''
   AppPort:
     Description: 'The port exposed by the app container that receives traffic from the load balancer or the proxy container (AppPort <> ProxyPort <> SidecarPort).'
     Type: Number
@@ -164,7 +172,11 @@ Parameters:
     Type: String
     Default: ''
   SidecarImage:
-    Description: 'Optional Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag).'
+    Description: 'Optional Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set SidecarImageSecretModule as well!'
+    Type: String
+    Default: ''
+  SidecarImageSecretModule:
+    Description: 'Optional stack name of secret module which contains the repository credentials for private registry authentication.'
     Type: String
     Default: ''
   SidecarPort:
@@ -347,6 +359,7 @@ Conditions:
   HasSubnetsReachPublic: !Equals [!Ref SubnetsReach, Public]
   HasAutoScaling: !Equals [!Ref AutoScaling, 'true']
   HasManagedPolicyArns: !Not [!Equals [!Ref ManagedPolicyArns, '']]
+  HasAppImageSecretModule: !Not [!Equals [!Ref AppImageSecretModule, '']]
   HasAppEnvironment1PlainText: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Equals [!Ref AppEnvironment1SecretModule, '']]
   HasAppEnvironment2PlainText: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Equals [!Ref AppEnvironment2SecretModule, '']]
   HasAppEnvironment3PlainText: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Equals [!Ref AppEnvironment3SecretModule, '']]
@@ -357,6 +370,7 @@ Conditions:
   HasAppEnvironment2Secret: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Not [!Equals [!Ref AppEnvironment2SecretModule, '']]]
   HasAppEnvironment3Secret: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Not [!Equals [!Ref AppEnvironment3SecretModule, '']]]
   HasProxyImage: !Not [!Equals [!Ref ProxyImage, '']]
+  HasProxyImageSecretModule: !Not [!Equals [!Ref ProxyImageSecretModule, '']]
   HasProxyEnvironment1PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment1Key, '']], !Equals [!Ref ProxyEnvironment1SecretModule, '']]
   HasProxyEnvironment2PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment2Key, '']], !Equals [!Ref ProxyEnvironment2SecretModule, '']]
   HasProxyEnvironment3PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment3Key, '']], !Equals [!Ref ProxyEnvironment3SecretModule, '']]
@@ -364,6 +378,7 @@ Conditions:
   HasProxyEnvironment2Secret: !And [!Not [!Equals [!Ref ProxyEnvironment2Key, '']], !Not [!Equals [!Ref ProxyEnvironment2SecretModule, '']]]
   HasProxyEnvironment3Secret: !And [!Not [!Equals [!Ref ProxyEnvironment3Key, '']], !Not [!Equals [!Ref ProxyEnvironment3SecretModule, '']]]
   HasSidecarImage: !Not [!Equals [!Ref SidecarImage, '']]
+  HasSidecarImageSecretModule: !Not [!Equals [!Ref SidecarImageSecretModule, '']]
   HasSidecarEnvironment1PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment1Key, '']], !Equals [!Ref SidecarEnvironment1SecretModule, '']]
   HasSidecarEnvironment2PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment2Key, '']], !Equals [!Ref SidecarEnvironment2SecretModule, '']]
   HasSidecarEnvironment3PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment3Key, '']], !Equals [!Ref SidecarEnvironment3SecretModule, '']]
@@ -400,6 +415,27 @@ Resources:
             - 'logs:CreateLogStream'
             - 'logs:PutLogEvents'
             Resource: !GetAtt 'LogGroup.Arn'
+          - Effect: Allow
+            Action: 'kms:Decrypt'
+            Resource: '*'
+          - !If
+            - HasProxyImageSecretModule
+            - Effect: Allow
+              Action: 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${ProxyImageSecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasAppImageSecretModule
+            - Effect: Allow
+              Action: 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppImageSecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasSidecarImageSecretModule
+            - Effect: Allow
+              Action: 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${SidecarImageSecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
           - !If
             - HasAppEnvironment1Secret
             - Effect: Allow
@@ -481,6 +517,7 @@ Resources:
         - HasProxyImage
         - Name: proxy
           Image: !Ref ProxyImage
+          RepositoryCredentials: !If [HasProxyImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${ProxyImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           PortMappings:
           - !If [HasTargetModule, {ContainerPort: !Ref ProxyPort, Protocol: tcp}, !Ref 'AWS::NoValue']
           Essential: true
@@ -501,6 +538,7 @@ Resources:
         - !Ref 'AWS::NoValue'
       - Name: app
         Image: !Ref AppImage
+        RepositoryCredentials: !If [HasAppImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${AppImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         PortMappings:
         - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
         Essential: true
@@ -525,6 +563,7 @@ Resources:
         - HasSidecarImage
         - Name: sidecar
           Image: !Ref SidecarImage
+          RepositoryCredentials: !If [HasSidecarImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${SidecarImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           PortMappings:
           - ContainerPort: !Ref SidecarPort
             Protocol: tcp
@@ -733,7 +772,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.6.0'
+    Value: '2.7.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
