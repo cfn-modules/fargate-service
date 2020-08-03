@@ -602,7 +602,7 @@ Resources:
       RequiresCompatibilities: [FARGATE]
       TaskRoleArn: !GetAtt 'TaskRole.Arn'
       Volumes:
-      - !If [HasFileSystemModule1, {EFSVolumeConfiguration: {FilesystemId: {'Fn::ImportValue': !Sub '${FileSystemModule1}-Id'}, TransitEncryption: true}, Name: efs1}, !Ref 'AWS::NoValue']
+      - !If [HasFileSystemModule1, {EFSVolumeConfiguration: {FilesystemId: {'Fn::ImportValue': !Sub '${FileSystemModule1}-Id'}, TransitEncryption: ENABLED}, Name: efs1}, !Ref 'AWS::NoValue']
   LogGroup:
     Type: 'AWS::Logs::LogGroup'
     Properties:
