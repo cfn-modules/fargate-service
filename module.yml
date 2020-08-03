@@ -27,20 +27,24 @@ Parameters:
     Description: 'Optional stack name of module implementing Target.'
     Type: String
     Default: ''
+  FileSystemModule1:
+    Description: 'Optional stack name of efs-file-system module.'
+    Type: String
+    Default: ''
   AlertingModule:
     Description: 'Optional but recommended stack name of alerting module.'
     Type: String
     Default: ''
   ClientSgModule1:
-    Description: 'Optional stack name of client-sg module to mark traffic from EC2 instance.'
+    Description: 'Optional stack name of client-sg module to mark traffic from Fargate task.'
     Type: String
     Default: ''
   ClientSgModule2:
-    Description: 'Optional stack name of client-sg module to mark traffic from EC2 instance.'
+    Description: 'Optional stack name of client-sg module to mark traffic from Fargate task.'
     Type: String
     Default: ''
   ClientSgModule3:
-    Description: 'Optional stack name of client-sg module to mark traffic from EC2 instance.'
+    Description: 'Optional stack name of client-sg module to mark traffic from Fargate task.'
     Type: String
     Default: ''
   ManagedPolicyArns:
@@ -351,6 +355,7 @@ Conditions:
   HasNotClusterModule: !Equals [!Ref ClusterModule, '']
   HasClusterModule: !Not [!Condition HasNotClusterModule]
   HasTargetModule: !Not [!Equals [!Ref TargetModule, '']]
+  HasFileSystemModule1: !Not [!Equals [!Ref FileSystemModule1, '']]
   HasNotTargetModule: !Not [!Condition HasTargetModule]
   HasAlertingModule: !Not [!Equals [!Ref AlertingModule, '']]
   HasClientSgModule1: !Not [!Equals [!Ref ClientSgModule1, '']]
@@ -535,6 +540,8 @@ Resources:
           - !If [HasProxyEnvironment1Secret, {Name: !Ref ProxyEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           - !If [HasProxyEnvironment2Secret, {Name: !Ref ProxyEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           - !If [HasProxyEnvironment3Secret, {Name: !Ref ProxyEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          MountPoints:
+          - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
         - !Ref 'AWS::NoValue'
       - Name: app
         Image: !Ref AppImage
@@ -559,6 +566,8 @@ Resources:
         - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment3Secret, {Name: !Ref AppEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        MountPoints:
+        - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
       - !If
         - HasSidecarImage
         - Name: sidecar
@@ -582,6 +591,8 @@ Resources:
           - !If [HasSidecarEnvironment1Secret, {Name: !Ref SidecarEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           - !If [HasSidecarEnvironment2Secret, {Name: !Ref SidecarEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           - !If [HasSidecarEnvironment3Secret, {Name: !Ref SidecarEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+          MountPoints:
+          - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
         - !Ref 'AWS::NoValue'
       Cpu: !FindInMap [CpuMap, !Ref Cpu, Cpu]
       ExecutionRoleArn: !GetAtt 'TaskExecutionRole.Arn'
@@ -590,6 +601,8 @@ Resources:
       NetworkMode: awsvpc
       RequiresCompatibilities: [FARGATE]
       TaskRoleArn: !GetAtt 'TaskRole.Arn'
+      Volumes:
+      - !If [HasFileSystemModule1, {EFSVolumeConfiguration: {FilesystemId: {'Fn::ImportValue': !Sub '${FileSystemModule1}-Id'}, TransitEncryption: true}, Name: efs1}, !Ref 'AWS::NoValue']
   LogGroup:
     Type: 'AWS::Logs::LogGroup'
     Properties:
@@ -772,7 +785,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.7.0'
+    Value: '2.8.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:

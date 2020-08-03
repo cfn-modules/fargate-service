@@ -32,6 +32,7 @@ Resources:
         VpcModule: !GetAtt 'Vpc.Outputs.StackName' # required
         ClusterModule: !GetAtt 'Cluster.Outputs.StackName' # optional
         TargetModule: '' # optional
+        FileSystemModule1: '' # optional
         AlertingModule: '' # optional
         ClientSgModule1: '' # optional
         ClientSgModule2: '' # optional
@@ -136,6 +137,13 @@ Resources:
       <td></td>
     </tr>
     <tr>
+      <td>FileSystemModule1</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/efs-file-system">efs-file-system module</a> mounted to /mnt/efs1</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>AlertingModule</td>
       <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/alerting">alerting module</a></td>
       <td></td>
@@ -144,21 +152,21 @@ Resources:
     </tr>
     <tr>
       <td>ClientSgModule1</td>
-      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/client-sg">client-sg module</a> to mark traffic from EC2 instance</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/client-sg">client-sg module</a> to mark traffic from Fargate task</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
       <td>ClientSgModule2</td>
-      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/client-sg">client-sg module</a> to mark traffic from EC2 instance</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/client-sg">client-sg module</a> to mark traffic from Fargate task</td>
       <td></td>
       <td>no</td>
       <td></td>
     </tr>
     <tr>
       <td>ClientSgModule3</td>
-      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/client-sg">client-sg module</a> to mark traffic from EC2 instance</td>
+      <td>Stack name of <a href="https://www.npmjs.com/package/@cfn-modules/client-sg">client-sg module</a> to mark traffic from Fargate task</td>
       <td></td>
       <td>no</td>
       <td></td>
