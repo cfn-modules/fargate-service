@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/cfn-modules/fargate-service.svg?branch=master)](https://travis-ci.org/cfn-modules/fargate-service)
-[![NPM version](https://img.shields.io/npm/v/@cfn-modules/fargate-service.svg)](https://www.npmjs.com/package/@cfn-modules/fargate-service)
-
 # cfn-modules: Fargate service
 
 Fargate service.
