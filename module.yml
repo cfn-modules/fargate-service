@@ -61,42 +61,6 @@ Parameters:
     Default: 8000
     MinValue: 1
     MaxValue: 49150
-  ProxyEnvironment1Key:
-    Description: 'Optional environment variable 1 key for proxy container.'
-    Type: String
-    Default: ''
-  ProxyEnvironment1Value:
-    Description: 'Optional environment variable 1 plain-text value for proxy container (if ProxyEnvironment1Key is set, set either ProxyEnvironment1Value or ProxyEnvironment1SecretModule).'
-    Type: String
-    Default: ''
-  ProxyEnvironment1SecretModule:
-    Description: 'Optional environment variable 1 stack name of secret module for proxy container (if ProxyEnvironment1Key is set, set either ProxyEnvironment1Value or ProxyEnvironment1SecretModule).'
-    Type: String
-    Default: ''
-  ProxyEnvironment2Key:
-    Description: 'Optional environment variable 2 key for proxy container.'
-    Type: String
-    Default: ''
-  ProxyEnvironment2Value:
-    Description: 'Optional environment variable 2 plain-text value for proxy container (if ProxyEnvironment2Key is set, set either ProxyEnvironment2Value or ProxyEnvironment2SecretModule).'
-    Type: String
-    Default: ''
-  ProxyEnvironment2SecretModule:
-    Description: 'Optional environment variable 2 stack name of secret module for proxy container (if ProxyEnvironment2Key is set, set either ProxyEnvironment2Value or ProxyEnvironment2SecretModule).'
-    Type: String
-    Default: ''
-  ProxyEnvironment3Key:
-    Description: 'Optional environment variable 3 key for proxy container.'
-    Type: String
-    Default: ''
-  ProxyEnvironment3Value:
-    Description: 'Optional environment variable 3 plain-text value for proxy container (if ProxyEnvironment3Key is set, set either ProxyEnvironment3Value or ProxyEnvironment3SecretModule).'
-    Type: String
-    Default: ''
-  ProxyEnvironment3SecretModule:
-    Description: 'Optional environment variable 3 stack name of secret module for proxy container (if ProxyEnvironment3Key is set, set either ProxyEnvironment3Value or ProxyEnvironment3SecretModule).'
-    Type: String
-    Default: ''
   AppImage:
     Description: 'The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set AppImageSecretModule as well!'
     Type: String
@@ -168,6 +132,38 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment6Value:
+    Description: 'Optional environment variable 6 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment7Key:
+    Description: 'Optional environment variable 6 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment7Value:
+    Description: 'Optional environment variable 6 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment8Key:
+    Description: 'Optional environment variable 6 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment8Value:
+    Description: 'Optional environment variable 6 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment9Key:
+    Description: 'Optional environment variable 6 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment9Value:
+    Description: 'Optional environment variable 6 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment10Key:
+    Description: 'Optional environment variable 6 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment10Value:
     Description: 'Optional environment variable 6 plain-text value for app container.'
     Type: String
     Default: ''
@@ -366,17 +362,15 @@ Conditions:
   HasAppEnvironment4PlainText: !Not [!Equals [!Ref AppEnvironment4Key, '']]
   HasAppEnvironment5PlainText: !Not [!Equals [!Ref AppEnvironment5Key, '']]
   HasAppEnvironment6PlainText: !Not [!Equals [!Ref AppEnvironment6Key, '']]
+  HasAppEnvironment7PlainText: !Not [!Equals [!Ref AppEnvironment7Key, '']]
+  HasAppEnvironment8PlainText: !Not [!Equals [!Ref AppEnvironment8Key, '']]
+  HasAppEnvironment9PlainText: !Not [!Equals [!Ref AppEnvironment9Key, '']]
+  HasAppEnvironment10PlainText: !Not [!Equals [!Ref AppEnvironment10Key, '']]
   HasAppEnvironment1Secret: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Not [!Equals [!Ref AppEnvironment1SecretModule, '']]]
   HasAppEnvironment2Secret: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Not [!Equals [!Ref AppEnvironment2SecretModule, '']]]
   HasAppEnvironment3Secret: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Not [!Equals [!Ref AppEnvironment3SecretModule, '']]]
   HasProxyImage: !Not [!Equals [!Ref ProxyImage, '']]
   HasProxyImageSecretModule: !Not [!Equals [!Ref ProxyImageSecretModule, '']]
-  HasProxyEnvironment1PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment1Key, '']], !Equals [!Ref ProxyEnvironment1SecretModule, '']]
-  HasProxyEnvironment2PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment2Key, '']], !Equals [!Ref ProxyEnvironment2SecretModule, '']]
-  HasProxyEnvironment3PlainText: !And [!Not [!Equals [!Ref ProxyEnvironment3Key, '']], !Equals [!Ref ProxyEnvironment3SecretModule, '']]
-  HasProxyEnvironment1Secret: !And [!Not [!Equals [!Ref ProxyEnvironment1Key, '']], !Not [!Equals [!Ref ProxyEnvironment1SecretModule, '']]]
-  HasProxyEnvironment2Secret: !And [!Not [!Equals [!Ref ProxyEnvironment2Key, '']], !Not [!Equals [!Ref ProxyEnvironment2SecretModule, '']]]
-  HasProxyEnvironment3Secret: !And [!Not [!Equals [!Ref ProxyEnvironment3Key, '']], !Not [!Equals [!Ref ProxyEnvironment3SecretModule, '']]]
   HasSidecarImage: !Not [!Equals [!Ref SidecarImage, '']]
   HasSidecarImageSecretModule: !Not [!Equals [!Ref SidecarImageSecretModule, '']]
   HasSidecarEnvironment1PlainText: !And [!Not [!Equals [!Ref SidecarEnvironment1Key, '']], !Equals [!Ref SidecarEnvironment1SecretModule, '']]
@@ -458,27 +452,6 @@ Resources:
               Resource: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}
             - !Ref 'AWS::NoValue'
           - !If
-            - HasProxyEnvironment1Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasProxyEnvironment2Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasProxyEnvironment3Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
             - HasSidecarEnvironment1Secret
             - Effect: Allow
               Action:
@@ -527,14 +500,6 @@ Resources:
               'awslogs-region': !Ref 'AWS::Region'
               'awslogs-group': !Ref LogGroup
               'awslogs-stream-prefix': proxy
-          Environment:
-          - !If [HasProxyEnvironment1PlainText, {Name: !Ref ProxyEnvironment1Key, Value: !Ref ProxyEnvironment1Value}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment2PlainText, {Name: !Ref ProxyEnvironment2Key, Value: !Ref ProxyEnvironment2Value}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment3PlainText, {Name: !Ref ProxyEnvironment3Key, Value: !Ref ProxyEnvironment3Value}, !Ref 'AWS::NoValue']
-          Secrets:
-          - !If [HasProxyEnvironment1Secret, {Name: !Ref ProxyEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment2Secret, {Name: !Ref ProxyEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment3Secret, {Name: !Ref ProxyEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !Ref 'AWS::NoValue'
       - Name: app
         Image: !Ref AppImage
@@ -555,6 +520,10 @@ Resources:
         - !If [HasAppEnvironment4PlainText, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment5PlainText, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment6PlainText, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment7PlainText, {Name: !Ref AppEnvironment7Key, Value: !Ref AppEnvironment7Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment8PlainText, {Name: !Ref AppEnvironment8Key, Value: !Ref AppEnvironment8Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment9PlainText, {Name: !Ref AppEnvironment9Key, Value: !Ref AppEnvironment9Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment10PlainText, {Name: !Ref AppEnvironment10Key, Value: !Ref AppEnvironment10Value}, !Ref 'AWS::NoValue']
         Secrets:
         - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
