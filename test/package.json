@@ -8,7 +8,7 @@
     "@cfn-modules/efs-file-system": "1.2.0",
     "@cfn-modules/ecs-cluster": "1.1.0",
     "@cfn-modules/alb": "1.0.4",
-    "@cfn-modules/alb-listener": "1.1.0",
+    "@cfn-modules/alb-listener": "1.2.0",
     "@cfn-modules/ecs-alb-target": "1.3.0",
     "@cfn-modules/nlb": "1.1.0",
     "@cfn-modules/ecs-nlb-listener-and-target": "1.3.0",
