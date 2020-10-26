@@ -634,6 +634,7 @@ Resources:
           - !If [HasClientSgModule2, {'Fn::ImportValue': !Sub '${ClientSgModule2}-SecurityGroupId'}, !Ref 'AWS::NoValue']
           - !If [HasClientSgModule3, {'Fn::ImportValue': !Sub '${ClientSgModule3}-SecurityGroupId'}, !Ref 'AWS::NoValue']
           Subnets: !Split [',', {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIds${SubnetsReach}'}]
+      PlatformVersion: '1.4.0'
       TaskDefinition: !Ref TaskDefinition
   ServiceFailedNotification:
     Condition: HasAlertingModule
