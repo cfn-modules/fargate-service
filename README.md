@@ -47,6 +47,12 @@ Resources:
         ProxyEnvironment3Key: '' # optional
         ProxyEnvironment3Value: '' # optional
         ProxyEnvironment3SecretModule: '' # optional
+        ProxyEnvironment4Key: '' # optional
+        ProxyEnvironment4Value: '' # optional
+        ProxyEnvironment4SecretModule: '' # optional
+        ProxyEnvironment5Key: '' # optional
+        ProxyEnvironment5Value: '' # optional
+        ProxyEnvironment5SecretModule: '' # optional
         AppImage: 'widdix/hello:v1' # optional
         AppImageSecretModule '' # optional
         AppPort: '80' # optional
@@ -61,13 +67,24 @@ Resources:
         AppEnvironment3SecretModule: '' # optional
         AppEnvironment4Key: '' # optional
         AppEnvironment4Value: '' # optional
+        AppEnvironment4SecretModule: '' # optional
         AppEnvironment5Key: '' # optional
         AppEnvironment5Value: '' # optional
+        AppEnvironment5SecretModule: '' # optional
         AppEnvironment6Key: '' # optional
         AppEnvironment6Value: '' # optional
+        AppEnvironment7Key: '' # optional
+        AppEnvironment7Value: '' # optional
+        AppEnvironment8Key: '' # optional
+        AppEnvironment8Value: '' # optional
+        AppEnvironment9Key: '' # optional
+        AppEnvironment9Value: '' # optional
+        AppEnvironment10Key: '' # optional
+        AppEnvironment10Value: '' # optional
         SidecarImage: '' # optional
         SidecarImageSecretModule '' # optional
         SidecarPort: '9000' # optional
+        SidecarProtocol: 'tcp' # optional
         SidecarEnvironment1Key: '' # optional
         SidecarEnvironment1Value: '' # optional
         SidecarEnvironment1SecretModule: '' # optional
@@ -77,6 +94,12 @@ Resources:
         SidecarEnvironment3Key: '' # optional
         SidecarEnvironment3Value: '' # optional
         SidecarEnvironment3SecretModule: '' # optional
+        SidecarEnvironment4Key: '' # optional
+        SidecarEnvironment4Value: '' # optional
+        SidecarEnvironment4SecretModule: '' # optional
+        SidecarEnvironment5Key: '' # optional
+        SidecarEnvironment5Value: '' # optional
+        SidecarEnvironment5SecretModule: '' # optional
         Cpu: '0.25' # optional
         Memory: '0.5' # optional
         DesiredCount: '2' # optional
@@ -260,6 +283,48 @@ Resources:
       <td></td>
     </tr>
     <tr>
+      <td>ProxyEnvironment4Key</td>
+      <td>Environment variable 4 key for proxy container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ProxyEnvironment4Value</td>
+      <td>Environment variable 4 plain-text value for proxy container (if ProxyEnvironment4Key is set, set either ProxyEnvironment4Value or ProxyEnvironment4SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ProxyEnvironment4SecretModule</td>
+      <td>Environment variable 4 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for proxy container (if ProxyEnvironment4Key is set, set either ProxyEnvironment4Value or ProxyEnvironment4SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ProxyEnvironment5Key</td>
+      <td>Environment variable 5 key for proxy container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ProxyEnvironment5Value</td>
+      <td>Environment variable 5 plain-text value for proxy container (if ProxyEnvironment5Key is set, set either ProxyEnvironment5Value or ProxyEnvironment5SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ProxyEnvironment5SecretModule</td>
+      <td>Environment variable 5 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for proxy container (if ProxyEnvironment5Key is set, set either ProxyEnvironment5Value or ProxyEnvironment5SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>AppImage</td>
       <td>The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set AppImageSecretModule as well!</td>
       <td>widdix/hello:v1</td>
@@ -352,7 +417,14 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment4Value</td>
-      <td>Environment variable 4 plain-text value for app container</td>
+      <td>Environment variable 4 plain-text value for app container (if AppEnvironment4Key is set, set either AppEnvironment4Value or AppEnvironment4SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment4SecretModule</td>
+      <td>Environment variable 4 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment4Key is set, set either AppEnvironment4Value or AppEnvironment4SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -366,7 +438,14 @@ Resources:
     </tr>
     <tr>
       <td>AppEnvironment5Value</td>
-      <td>Environment variable 5 plain-text value for app container</td>
+      <td>Environment variable 5 plain-text value for app container (if AppEnvironment5Key is set, set either AppEnvironment5Value or AppEnvironment5SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment5SecretModule</td>
+      <td>Environment variable 5 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for app container (if AppEnvironment5Key is set, set either AppEnvironment5Value or AppEnvironment5SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -381,6 +460,62 @@ Resources:
     <tr>
       <td>AppEnvironment6Value</td>
       <td>Environment variable 6 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment7Key</td>
+      <td>Environment variable 7 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment7Value</td>
+      <td>Environment variable 7 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment8Key</td>
+      <td>Environment variable 8 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment8Value</td>
+      <td>Environment variable 8 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment9Key</td>
+      <td>Environment variable 9 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment9Value</td>
+      <td>Environment variable 9 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment10Key</td>
+      <td>Environment variable 10 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment10Value</td>
+      <td>Environment variable 10 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>
@@ -405,6 +540,13 @@ Resources:
       <td>9000</td>
       <td>no</td>
       <td></td>
+    </tr>
+    <tr>
+      <td>SidecarProtocol</td>
+      <td>The protocol used by the sidecar container reachable from the app container on host localhost.</td>
+      <td>tcp</td>
+      <td>no</td>
+      <td>[tcp, udp]</td>
     </tr>
     <tr>
       <td>SidecarEnvironment1Key</td>
@@ -465,6 +607,48 @@ Resources:
     <tr>
       <td>SidecarEnvironment3SecretModule</td>
       <td>Environment variable 3 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment3Key is set, set either SidecarEnvironment3Value or SidecarEnvironment3SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment4Key</td>
+      <td>Environment variable 4 key for sidecar container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment4Value</td>
+      <td>Environment variable 4 plain-text value for sidecar container (if SidecarEnvironment4Key is set, set either SidecarEnvironment4Value or SidecarEnvironment4SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment4SecretModule</td>
+      <td>Environment variable 4 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment4Key is set, set either SidecarEnvironment4Value or SidecarEnvironment4SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment5Key</td>
+      <td>Environment variable 5 key for sidecar container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment5Value</td>
+      <td>Environment variable 5 plain-text value for sidecar container (if SidecarEnvironment5Key is set, set either SidecarEnvironment5Value or SidecarEnvironment5SecretModule)</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SidecarEnvironment5SecretModule</td>
+      <td>Environment variable 5 stack name of <a href="https://www.npmjs.com/package/@cfn-modules/secret">secret module</a> for sidecar container (if SidecarEnvironment5Key is set, set either SidecarEnvironment5Value or SidecarEnvironment5SecretModule)</td>
       <td></td>
       <td>no</td>
       <td></td>
