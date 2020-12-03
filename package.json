@@ -1,6 +1,6 @@
 {
   "name": "@cfn-modules/fargate-service",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "description": "ECS Service running on Fargate",
   "author": "Michael Wittig <michael@widdix.de>",
   "license": "Apache-2.0",
