@@ -369,6 +369,11 @@ Parameters:
     Default: 60
     MinValue: 0
     MaxValue: 1800
+  Spot:
+    Description: 'Run workload on spot capacity?'
+    Type: String
+    Default: false
+    AllowedValues: [true, false]
 Mappings:
   CpuMap:
     '0.25':
@@ -497,6 +502,7 @@ Conditions:
   HasSidecarEnvironment3Secret: !And [!Not [!Equals [!Ref SidecarEnvironment3Key, '']], !Not [!Equals [!Ref SidecarEnvironment3SecretModule, '']]]
   HasSidecarEnvironment4Secret: !And [!Not [!Equals [!Ref SidecarEnvironment4Key, '']], !Not [!Equals [!Ref SidecarEnvironment4SecretModule, '']]]
   HasSidecarEnvironment5Secret: !And [!Not [!Equals [!Ref SidecarEnvironment5Key, '']], !Not [!Equals [!Ref SidecarEnvironment5SecretModule, '']]]
+  HasSpot: !Equals [!Ref Spot, 'true']
 Resources:
   Cluster:
     Condition: HasNotClusterModule
@@ -737,6 +743,10 @@ Resources:
   Service:
     Type: 'AWS::ECS::Service'
     Properties:
+      CapacityProviderStrategy:
+      - Base: 0
+        CapacityProvider: !If [HasSpot, FARGATE_SPOT, FARGATE]
+        Weight: 1
       Cluster: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
       DeploymentConfiguration:
         MaximumPercent: 200
@@ -907,7 +917,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.9.0'
+    Value: '2.10.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
