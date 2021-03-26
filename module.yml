@@ -753,7 +753,6 @@ Resources:
         MinimumHealthyPercent: 50
       DesiredCount: !Ref DesiredCount
       HealthCheckGracePeriodSeconds: !If [HasTargetModule, !Ref HealthCheckGracePeriodSeconds, !Ref 'AWS::NoValue']
-      LaunchType: FARGATE
       LoadBalancers:
       - !If [HasTargetModule, {ContainerName: !If [HasProxyImage, proxy, app], ContainerPort: !If [HasProxyImage, !Ref ProxyPort, !Ref AppPort], TargetGroupArn: {'Fn::ImportValue': !Sub '${TargetModule}-Arn'}}, !Ref 'AWS::NoValue']
       NetworkConfiguration:
