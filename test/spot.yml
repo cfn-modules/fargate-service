@@ -11,17 +11,10 @@ Resources:
         FlowLog: 'false' # speed up the test
         NatGateways: 'false' # speed up the test
       TemplateURL: './node_modules/@cfn-modules/vpc/module.yml'
-  Secret:
-    Type: 'AWS::CloudFormation::Stack'
-    Properties:
-      Parameters:
-        Arn: 'arn:aws:secretsmanager:eu-west-1:237442020868:secret:cfn-modules-fargate-service-dockerhub-awvdgU'
-      TemplateURL: './node_modules/@cfn-modules/secret/wrapper.yml'
   Service:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       Parameters:
         VpcModule: !GetAtt 'Vpc.Outputs.StackName'
-        AppImage: 'hellomichibye/hello:v1'
-        AppImageSecretModule: !GetAtt 'Secret.Outputs.StackName'
+        Spot: 'true'
       TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'

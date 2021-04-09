@@ -109,6 +109,7 @@ Resources:
         SubnetsReach: 'Public' # optional
         AutoScaling: 'true' # optional
         HealthCheckGracePeriodSeconds: '60' # optional
+        Spot: 'false' # optional
       TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'
 ```
 
@@ -715,6 +716,13 @@ Resources:
       <td>60</td>
       <td>no</td>
       <td>0-1800</td>
+    </tr>
+    <tr>
+      <td>Spot</td>
+      <td>Run workload on spot capacity?</td>
+      <td>false</td>
+      <td>no</td>
+      <td>[true, false]</td>
     </tr>
   </tbody>
 </table>
