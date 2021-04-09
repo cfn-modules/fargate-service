@@ -15,7 +15,7 @@ Resources:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       Parameters:
-        Arn: 'arn:aws:secretsmanager:us-east-1:237442020868:secret:dockerhub-michael-O01ljL'
+        Arn: 'arn:aws:secretsmanager:eu-west-1:237442020868:secret:cfn-modules-fargate-service-dockerhub-awvdgU'
       TemplateURL: './node_modules/@cfn-modules/secret/wrapper.yml'
   Service:
     Type: 'AWS::CloudFormation::Stack'
