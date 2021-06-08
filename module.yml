@@ -751,6 +751,9 @@ Resources:
       DeploymentConfiguration:
         MaximumPercent: 200
         MinimumHealthyPercent: 50
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: true
       DesiredCount: !Ref DesiredCount
       HealthCheckGracePeriodSeconds: !If [HasTargetModule, !Ref HealthCheckGracePeriodSeconds, !Ref 'AWS::NoValue']
       LoadBalancers:
@@ -916,7 +919,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.10.0'
+    Value: '2.11.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
