@@ -775,7 +775,7 @@ Resources:
     Properties:
       EventPattern:
         source:
-        - 'aws.ec2'
+        - 'aws.ecs'
         'detail-type':
         - 'ECS Service Action'
         resources:
@@ -919,7 +919,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.11.0'
+    Value: '2.11.1'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
