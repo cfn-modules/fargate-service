@@ -110,6 +110,8 @@ Resources:
         AutoScaling: 'true' # optional
         HealthCheckGracePeriodSeconds: '60' # optional
         Spot: 'false' # optional
+        CpuArchitecture: 'X86_64' # optional
+        OperatingSystemFamily: 'LINUX' # optional
       TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'
 ```
 
@@ -723,6 +725,20 @@ Resources:
       <td>false</td>
       <td>no</td>
       <td>[true, false]</td>
+    </tr>
+    <tr>
+      <td>CpuArchitecture</td>
+      <td>The CPU architecture of the container.</td>
+      <td>X86_64</td>
+      <td>no</td>
+      <td>[X86_64, ARM64]</td>
+    </tr>
+    <tr>
+      <td>OperatingSystemFamily</td>
+      <td>The operating system family of the container.</td>
+      <td>LINUX</td>
+      <td>no</td>
+      <td>[LINUX, WINDOWS_SERVER_2004_CORE,  WINDOWS_SERVER_2016_FULL,  WINDOWS_SERVER_2019_CORE,  WINDOWS_SERVER_2019_FULL,  WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL,  WINDOWS_SERVER_20H2_CORE]</td>
     </tr>
   </tbody>
 </table>

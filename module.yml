@@ -374,6 +374,17 @@ Parameters:
     Type: String
     Default: false
     AllowedValues: [true, false]
+  CpuArchitecture:
+    Description: 'The CPU architecture of the container.'
+    Type: String
+    Default: 'X86_64'
+    AllowedValues: [ 'X86_64', 'ARM64' ]
+  OperatingSystemFamily:
+    Description: 'The operating system family of the container.'
+    Type: String
+    Default: 'LINUX'
+    AllowedValues: [ 'LINUX', 'WINDOWS_SERVER_2004_CORE', 'WINDOWS_SERVER_2016_FULL', 'WINDOWS_SERVER_2019_CORE', 'WINDOWS_SERVER_2019_FULL', 'WINDOWS_SERVER_2022_CORE', 'WINDOWS_SERVER_2022_FULL', 'WINDOWS_SERVER_20H2_CORE' ]
+
 Mappings:
   CpuMap:
     '0.25':
@@ -730,6 +741,9 @@ Resources:
       TaskRoleArn: !GetAtt 'TaskRole.Arn'
       Volumes:
       - !If [HasFileSystemModule1, {EFSVolumeConfiguration: {FilesystemId: {'Fn::ImportValue': !Sub '${FileSystemModule1}-Id'}, TransitEncryption: ENABLED}, Name: efs1}, !Ref 'AWS::NoValue']
+      RuntimePlatform:
+        CpuArchitecture: !Ref CpuArchitecture
+        OperatingSystemFamily: !Ref OperatingSystemFamily
   LogGroup:
     Type: 'AWS::Logs::LogGroup'
     Properties:
