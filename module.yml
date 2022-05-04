@@ -378,12 +378,12 @@ Parameters:
     Description: 'The CPU architecture of the container.'
     Type: String
     Default: 'X86_64'
-    AllowedValues: [ 'X86_64', 'ARM64' ]
+    AllowedValues: ['X86_64', 'ARM64']
   OperatingSystemFamily:
     Description: 'The operating system family of the container.'
     Type: String
     Default: 'LINUX'
-    AllowedValues: [ 'LINUX', 'WINDOWS_SERVER_2004_CORE', 'WINDOWS_SERVER_2016_FULL', 'WINDOWS_SERVER_2019_CORE', 'WINDOWS_SERVER_2019_FULL', 'WINDOWS_SERVER_2022_CORE', 'WINDOWS_SERVER_2022_FULL', 'WINDOWS_SERVER_20H2_CORE' ]
+    AllowedValues: ['LINUX', 'WINDOWS_SERVER_2004_CORE', 'WINDOWS_SERVER_2016_FULL', 'WINDOWS_SERVER_2019_CORE', 'WINDOWS_SERVER_2019_FULL', 'WINDOWS_SERVER_2022_CORE', 'WINDOWS_SERVER_2022_FULL', 'WINDOWS_SERVER_20H2_CORE']
 
 Mappings:
   CpuMap:
