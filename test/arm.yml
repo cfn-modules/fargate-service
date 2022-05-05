@@ -44,3 +44,6 @@ Resources:
         TargetModule: !GetAtt 'Target.Outputs.StackName'
         CpuArchitecture: 'ARM64'
       TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'
+Outputs:
+  DnsName:
+    Value: !GetAtt 'Alb.Outputs.DnsName'
