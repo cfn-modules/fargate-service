@@ -11,10 +11,36 @@ Resources:
         FlowLog: 'false' # speed up the test
         NatGateways: 'false' # speed up the test
       TemplateURL: './node_modules/@cfn-modules/vpc/module.yml'
-  Service:
+  Cluster:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: './node_modules/@cfn-modules/ecs-cluster/module.yml'
+  Alb:
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       Parameters:
         VpcModule: !GetAtt 'Vpc.Outputs.StackName'
+      TemplateURL: './node_modules/@cfn-modules/alb/module.yml'
+  AlbListener:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        AlbModule: !GetAtt 'Alb.Outputs.StackName'
+      TemplateURL: './node_modules/@cfn-modules/alb-listener/module.yml'
+  Target:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        AlbModule: !GetAtt 'Alb.Outputs.StackName'
+        AlbListenerModule: !GetAtt 'AlbListener.Outputs.StackName'
+        VpcModule: !GetAtt 'Vpc.Outputs.StackName'
+      TemplateURL: './node_modules/@cfn-modules/ecs-alb-target/module.yml'
+  Service:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      Parameters:
+        ClusterModule: !GetAtt 'Cluster.Outputs.StackName'
+        VpcModule: !GetAtt 'Vpc.Outputs.StackName'
+        TargetModule: !GetAtt 'Target.Outputs.StackName'
         CpuArchitecture: 'ARM64'
       TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'
