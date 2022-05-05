@@ -8,8 +8,8 @@ test.serial('nlb-single', async t => {
     const outputs = await cfntest.getStackOutputs(stackName);
     t.log(outputs);
     const res = await cfntest.probeHttpGet(`http://${outputs.DnsName}`);
-    t.is(res.headers.server, 'Apache/2.4.23 (Unix)');
-    t.true(res.data.includes('It works!'));
+    t.is(res.headers.server, 'nginx/1.20.2');
+    t.true(res.data.includes('Hello World! (v1)'));
   } finally {
     t.log(await cfntest.deleteStack(stackName));
     t.pass();
