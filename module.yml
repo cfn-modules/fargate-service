@@ -128,7 +128,7 @@ Parameters:
   AppImage:
     Description: 'The Docker image to use for the app container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set AppImageSecretModule as well!'
     Type: String
-    Default: 'widdix/hello:v1'
+    Default: 'public.ecr.aws/l0j0k6k8/hello:v1'
   AppImageSecretModule:
     Description: 'Optional stack name of secret module which contains the repository credentials for private registry authentication.'
     Type: String
@@ -374,6 +374,16 @@ Parameters:
     Type: String
     Default: false
     AllowedValues: [true, false]
+  CpuArchitecture:
+    Description: 'The CPU architecture of the container.'
+    Type: String
+    Default: 'X86_64'
+    AllowedValues: ['X86_64', 'ARM64']
+  OperatingSystemFamily:
+    Description: 'The operating system family of the container.'
+    Type: String
+    Default: 'LINUX'
+    AllowedValues: ['LINUX', 'WINDOWS_SERVER_2004_CORE', 'WINDOWS_SERVER_2016_FULL', 'WINDOWS_SERVER_2019_CORE', 'WINDOWS_SERVER_2019_FULL', 'WINDOWS_SERVER_2022_CORE', 'WINDOWS_SERVER_2022_FULL', 'WINDOWS_SERVER_20H2_CORE']
 Mappings:
   CpuMap:
     '0.25':
@@ -730,6 +740,9 @@ Resources:
       TaskRoleArn: !GetAtt 'TaskRole.Arn'
       Volumes:
       - !If [HasFileSystemModule1, {EFSVolumeConfiguration: {FilesystemId: {'Fn::ImportValue': !Sub '${FileSystemModule1}-Id'}, TransitEncryption: ENABLED}, Name: efs1}, !Ref 'AWS::NoValue']
+      RuntimePlatform:
+        CpuArchitecture: !Ref CpuArchitecture
+        OperatingSystemFamily: !Ref OperatingSystemFamily
   LogGroup:
     Type: 'AWS::Logs::LogGroup'
     Properties:
@@ -919,7 +932,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.11.1'
+    Value: '2.12.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:

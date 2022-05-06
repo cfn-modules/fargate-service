@@ -1,10 +1,10 @@
 const test = require('ava');
 const cfntest = require('@cfn-modules/test');
 
-test.serial('alb-single', async t => {
+test.serial('arm', async t => {
   const stackName = cfntest.stackName();
   try {
-    t.log(await cfntest.createStack(`${__dirname}/alb-single.yml`, stackName, {}));
+    t.log(await cfntest.createStack(`${__dirname}/arm.yml`, stackName, {}));
     const outputs = await cfntest.getStackOutputs(stackName);
     t.log(outputs);
     const res = await cfntest.probeHttpGet(`http://${outputs.DnsName}`);
