@@ -239,6 +239,90 @@ Parameters:
     Description: 'Optional environment variable 10 plain-text value for app container.'
     Type: String
     Default: ''
+  AppEnvironment11Key:
+    Description: 'Optional environment variable 11 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment11Value:
+    Description: 'Optional environment variable 11 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment12Key:
+    Description: 'Optional environment variable 12 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment12Value:
+    Description: 'Optional environment variable 12 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment13Key:
+    Description: 'Optional environment variable 13 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment13Value:
+    Description: 'Optional environment variable 13 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment14Key:
+    Description: 'Optional environment variable 14 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment14Value:
+    Description: 'Optional environment variable 14 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment15Key:
+    Description: 'Optional environment variable 15 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment15Value:
+    Description: 'Optional environment variable 15 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment16Key:
+    Description: 'Optional environment variable 16 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment16Value:
+    Description: 'Optional environment variable 16 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment17Key:
+    Description: 'Optional environment variable 17 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment17Value:
+    Description: 'Optional environment variable 17 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment18Key:
+    Description: 'Optional environment variable 18 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment18Value:
+    Description: 'Optional environment variable 18 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment19Key:
+    Description: 'Optional environment variable 19 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment19Value:
+    Description: 'Optional environment variable 19 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment20Key:
+    Description: 'Optional environment variable 20 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment20Value:
+    Description: 'Optional environment variable 20 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppCommand:
+    Description: 'Optional command for starting app container.'
+    Type: CommaDelimitedList
+    Default: ''
   SidecarImage:
     Description: 'Optional Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set SidecarImageSecretModule as well!'
     Type: String
@@ -384,6 +468,11 @@ Parameters:
     Type: String
     Default: 'LINUX'
     AllowedValues: ['LINUX', 'WINDOWS_SERVER_2004_CORE', 'WINDOWS_SERVER_2016_FULL', 'WINDOWS_SERVER_2019_CORE', 'WINDOWS_SERVER_2019_FULL', 'WINDOWS_SERVER_2022_CORE', 'WINDOWS_SERVER_2022_FULL', 'WINDOWS_SERVER_20H2_CORE']
+  ExecuteCommand:
+    Description: 'Enable or disable ECS execute command.'
+    Type: String
+    Default: false
+    AllowedValues: [true, false]
 Mappings:
   CpuMap:
     '0.25':
@@ -483,6 +572,16 @@ Conditions:
   HasAppEnvironment8PlainText: !Not [!Equals [!Ref AppEnvironment8Key, '']]
   HasAppEnvironment9PlainText: !Not [!Equals [!Ref AppEnvironment9Key, '']]
   HasAppEnvironment10PlainText: !Not [!Equals [!Ref AppEnvironment10Key, '']]
+  HasAppEnvironment11PlainText: !Not [!Equals [!Ref AppEnvironment11Key, '']]
+  HasAppEnvironment12PlainText: !Not [!Equals [!Ref AppEnvironment12Key, '']]
+  HasAppEnvironment13PlainText: !Not [!Equals [!Ref AppEnvironment13Key, '']]
+  HasAppEnvironment14PlainText: !Not [!Equals [!Ref AppEnvironment14Key, '']]
+  HasAppEnvironment15PlainText: !Not [!Equals [!Ref AppEnvironment15Key, '']]
+  HasAppEnvironment16PlainText: !Not [!Equals [!Ref AppEnvironment16Key, '']]
+  HasAppEnvironment17PlainText: !Not [!Equals [!Ref AppEnvironment17Key, '']]
+  HasAppEnvironment18PlainText: !Not [!Equals [!Ref AppEnvironment18Key, '']]
+  HasAppEnvironment19PlainText: !Not [!Equals [!Ref AppEnvironment19Key, '']]
+  HasAppEnvironment20PlainText: !Not [!Equals [!Ref AppEnvironment20Key, '']]
   HasAppEnvironment1Secret: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Not [!Equals [!Ref AppEnvironment1SecretModule, '']]]
   HasAppEnvironment2Secret: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Not [!Equals [!Ref AppEnvironment2SecretModule, '']]]
   HasAppEnvironment3Secret: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Not [!Equals [!Ref AppEnvironment3SecretModule, '']]]
@@ -513,6 +612,7 @@ Conditions:
   HasSidecarEnvironment4Secret: !And [!Not [!Equals [!Ref SidecarEnvironment4Key, '']], !Not [!Equals [!Ref SidecarEnvironment4SecretModule, '']]]
   HasSidecarEnvironment5Secret: !And [!Not [!Equals [!Ref SidecarEnvironment5Key, '']], !Not [!Equals [!Ref SidecarEnvironment5SecretModule, '']]]
   HasSpot: !Equals [!Ref Spot, 'true']
+  HasExecuteCommand: !Equals [!Ref ExecuteCommand, 'true']
 Resources:
   Cluster:
     Condition: HasNotClusterModule
@@ -636,6 +736,20 @@ Resources:
           Principal:
             Service: 'ecs-tasks.amazonaws.com'
           Action: 'sts:AssumeRole'
+      Policies:
+      - PolicyName: AmazonECSTaskRolePolicy # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+        PolicyDocument:
+          Statement:
+          - !If
+            - HasExecuteCommand
+            - Effect: Allow
+              Action:
+              - 'ssmmessages:CreateControlChannel'
+              - 'ssmmessages:CreateDataChannel'
+              - 'ssmmessages:OpenControlChannel'
+              - 'ssmmessages:OpenDataChannel'
+              Resource: '*'
+            - !Ref 'AWS::NoValue'
       ManagedPolicyArns: !If [HasManagedPolicyArns, !Split [',', !Ref ManagedPolicyArns], !Ref 'AWS::NoValue']
   TaskDefinition:
     Type: 'AWS::ECS::TaskDefinition'
@@ -676,6 +790,7 @@ Resources:
         PortMappings:
         - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
         Essential: true
+        Command: !Ref AppCommand
         LogConfiguration:
           LogDriver: awslogs
           Options:
@@ -693,6 +808,16 @@ Resources:
         - !If [HasAppEnvironment8PlainText, {Name: !Ref AppEnvironment8Key, Value: !Ref AppEnvironment8Value}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment9PlainText, {Name: !Ref AppEnvironment9Key, Value: !Ref AppEnvironment9Value}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment10PlainText, {Name: !Ref AppEnvironment10Key, Value: !Ref AppEnvironment10Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment11PlainText, {Name: !Ref AppEnvironment11Key, Value: !Ref AppEnvironment11Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment12PlainText, {Name: !Ref AppEnvironment12Key, Value: !Ref AppEnvironment12Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment13PlainText, {Name: !Ref AppEnvironment13Key, Value: !Ref AppEnvironment13Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment14PlainText, {Name: !Ref AppEnvironment14Key, Value: !Ref AppEnvironment14Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment15PlainText, {Name: !Ref AppEnvironment15Key, Value: !Ref AppEnvironment15Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment16PlainText, {Name: !Ref AppEnvironment16Key, Value: !Ref AppEnvironment16Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment17PlainText, {Name: !Ref AppEnvironment17Key, Value: !Ref AppEnvironment17Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment18PlainText, {Name: !Ref AppEnvironment18Key, Value: !Ref AppEnvironment18Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment19PlainText, {Name: !Ref AppEnvironment19Key, Value: !Ref AppEnvironment19Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment20PlainText, {Name: !Ref AppEnvironment20Key, Value: !Ref AppEnvironment20Value}, !Ref 'AWS::NoValue']
         Secrets:
         - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
@@ -782,6 +907,7 @@ Resources:
           Subnets: !Split [',', {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIds${SubnetsReach}'}]
       PlatformVersion: '1.4.0'
       TaskDefinition: !Ref TaskDefinition
+      EnableExecuteCommand: !Ref ExecuteCommand
   ServiceFailedNotification:
     Condition: HasAlertingModule
     Type: 'AWS::Events::Rule'
@@ -932,7 +1058,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.12.0'
+    Value: '2.13.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:

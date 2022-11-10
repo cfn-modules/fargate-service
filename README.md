@@ -81,6 +81,28 @@ Resources:
         AppEnvironment9Value: '' # optional
         AppEnvironment10Key: '' # optional
         AppEnvironment10Value: '' # optional
+        AppEnvironment10Key: '' # optional
+        AppEnvironment10Value: '' # optional
+        AppEnvironment11Key: '' # optional
+        AppEnvironment11Value: '' # optional
+        AppEnvironment12Key: '' # optional
+        AppEnvironment12Value: '' # optional
+        AppEnvironment13Key: '' # optional
+        AppEnvironment13Value: '' # optional
+        AppEnvironment14Key: '' # optional
+        AppEnvironment14Value: '' # optional
+        AppEnvironment15Key: '' # optional
+        AppEnvironment15Value: '' # optional
+        AppEnvironment16Key: '' # optional
+        AppEnvironment16Value: '' # optional
+        AppEnvironment17Key: '' # optional
+        AppEnvironment17Value: '' # optional
+        AppEnvironment18Key: '' # optional
+        AppEnvironment18Value: '' # optional
+        AppEnvironment19Key: '' # optional
+        AppEnvironment19Value: '' # optional
+        AppEnvironment20Key: '' # optional
+        AppEnvironment20Value: '' # optional
         SidecarImage: '' # optional
         SidecarImageSecretModule '' # optional
         SidecarPort: '9000' # optional
@@ -112,6 +134,7 @@ Resources:
         Spot: 'false' # optional
         CpuArchitecture: 'X86_64' # optional
         OperatingSystemFamily: 'LINUX' # optional
+        ExecuteCommand: 'false' # optional
       TemplateURL: './node_modules/@cfn-modules/fargate-service/module.yml'
 ```
 
@@ -524,6 +547,146 @@ Resources:
       <td></td>
     </tr>
     <tr>
+      <td>AppEnvironment11Key</td>
+      <td>Environment variable 11 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment11Value</td>
+      <td>Environment variable 11 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment12Key</td>
+      <td>Environment variable 12 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment12Value</td>
+      <td>Environment variable 12 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment13Key</td>
+      <td>Environment variable 13 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment13Value</td>
+      <td>Environment variable 13 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment14Key</td>
+      <td>Environment variable 14 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment14Value</td>
+      <td>Environment variable 14 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment15Key</td>
+      <td>Environment variable 15 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment15Value</td>
+      <td>Environment variable 15 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment16Key</td>
+      <td>Environment variable 16 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment16Value</td>
+      <td>Environment variable 16 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment17Key</td>
+      <td>Environment variable 17 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment17Value</td>
+      <td>Environment variable 17 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment18Key</td>
+      <td>Environment variable 18 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment18Value</td>
+      <td>Environment variable 18 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment19Key</td>
+      <td>Environment variable 19 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment19Value</td>
+      <td>Environment variable 19 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment20Key</td>
+      <td>Environment variable 20 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment20Value</td>
+      <td>Environment variable 20 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>SidecarImage</td>
       <td>Docker image to use for the sidecar container. You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag). If the repository is private, set SidecarImageSecretModule as well!</td>
       <td></td>
@@ -739,6 +902,13 @@ Resources:
       <td>LINUX</td>
       <td>no</td>
       <td>[LINUX, WINDOWS_SERVER_2004_CORE,  WINDOWS_SERVER_2016_FULL,  WINDOWS_SERVER_2019_CORE,  WINDOWS_SERVER_2019_FULL,  WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL,  WINDOWS_SERVER_20H2_CORE]</td>
+    </tr>
+    <tr>
+      <td>ExecuteCommand</td>
+      <td>Enable or disable ECS execute command</td>
+      <td>false</td>
+      <td>no</td>
+      <td>[false, true]</td>
     </tr>
   </tbody>
 </table>
