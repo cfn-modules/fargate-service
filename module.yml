@@ -737,11 +737,11 @@ Resources:
             Service: 'ecs-tasks.amazonaws.com'
           Action: 'sts:AssumeRole'
       Policies:
-      - PolicyName: AmazonECSTaskRolePolicy # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
-        PolicyDocument:
-          Statement:
-          - !If
-            - HasExecuteCommand
+      - !If
+        - HasExecuteCommand
+        - PolicyName: AmazonECSTaskRolePolicy # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+          PolicyDocument:
+            Statement:
             - Effect: Allow
               Action:
               - 'ssmmessages:CreateControlChannel'
@@ -749,7 +749,7 @@ Resources:
               - 'ssmmessages:OpenControlChannel'
               - 'ssmmessages:OpenDataChannel'
               Resource: '*'
-            - !Ref 'AWS::NoValue'
+        - !Ref 'AWS::NoValue'
       ManagedPolicyArns: !If [HasManagedPolicyArns, !Split [',', !Ref ManagedPolicyArns], !Ref 'AWS::NoValue']
   TaskDefinition:
     Type: 'AWS::ECS::TaskDefinition'
