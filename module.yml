@@ -582,6 +582,7 @@ Conditions:
   HasAppEnvironment18PlainText: !Not [!Equals [!Ref AppEnvironment18Key, '']]
   HasAppEnvironment19PlainText: !Not [!Equals [!Ref AppEnvironment19Key, '']]
   HasAppEnvironment20PlainText: !Not [!Equals [!Ref AppEnvironment20Key, '']]
+  HasAppCommand: !Not [!Equals [!Join ['', !Ref AppCommand], '']]
   HasAppEnvironment1Secret: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Not [!Equals [!Ref AppEnvironment1SecretModule, '']]]
   HasAppEnvironment2Secret: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Not [!Equals [!Ref AppEnvironment2SecretModule, '']]]
   HasAppEnvironment3Secret: !And [!Not [!Equals [!Ref AppEnvironment3Key, '']], !Not [!Equals [!Ref AppEnvironment3SecretModule, '']]]
@@ -790,7 +791,7 @@ Resources:
         PortMappings:
         - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
         Essential: true
-        Command: !Ref AppCommand
+        Command: !If [HasAppCommand, !Ref AppCommand, Ref! 'AWS::NoValue']
         LogConfiguration:
           LogDriver: awslogs
           Options:
