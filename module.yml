@@ -791,7 +791,7 @@ Resources:
         PortMappings:
         - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
         Essential: true
-        Command: !If [HasAppCommand, !Ref AppCommand, Ref! 'AWS::NoValue']
+        Command: !If [HasAppCommand, !Ref AppCommand, !Ref 'AWS::NoValue']
         LogConfiguration:
           LogDriver: awslogs
           Options:
