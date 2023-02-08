@@ -103,6 +103,16 @@ Resources:
         AppEnvironment19Value: '' # optional
         AppEnvironment20Key: '' # optional
         AppEnvironment20Value: '' # optional
+        AppEnvironment21Key: '' # optional
+        AppEnvironment21Value: '' # optional
+        AppEnvironment22Key: '' # optional
+        AppEnvironment22Value: '' # optional
+        AppEnvironment23Key: '' # optional
+        AppEnvironment23Value: '' # optional
+        AppEnvironment24Key: '' # optional
+        AppEnvironment24Value: '' # optional
+        AppEnvironment25Key: '' # optional
+        AppEnvironment25Value: '' # optional
         SidecarImage: '' # optional
         SidecarImageSecretModule '' # optional
         SidecarPort: '9000' # optional
@@ -682,6 +692,76 @@ Resources:
     <tr>
       <td>AppEnvironment20Value</td>
       <td>Environment variable 20 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment21Key</td>
+      <td>Environment variable 21 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment21Value</td>
+      <td>Environment variable 21 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment22Key</td>
+      <td>Environment variable 22 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment22Value</td>
+      <td>Environment variable 22 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment23Key</td>
+      <td>Environment variable 23 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment23Value</td>
+      <td>Environment variable 23 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment24Key</td>
+      <td>Environment variable 24 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment24Value</td>
+      <td>Environment variable 24 plain-text value for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment25Key</td>
+      <td>Environment variable 25 key for app container</td>
+      <td></td>
+      <td>no</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>AppEnvironment25Value</td>
+      <td>Environment variable 25 plain-text value for app container</td>
       <td></td>
       <td>no</td>
       <td></td>

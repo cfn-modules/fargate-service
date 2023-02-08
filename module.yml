@@ -319,6 +319,46 @@ Parameters:
     Description: 'Optional environment variable 20 plain-text value for app container.'
     Type: String
     Default: ''
+  AppEnvironment21Key:
+    Description: 'Optional environment variable 21 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment21Value:
+    Description: 'Optional environment variable 21 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment22Key:
+    Description: 'Optional environment variable 22 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment22Value:
+    Description: 'Optional environment variable 22 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment23Key:
+    Description: 'Optional environment variable 23 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment23Value:
+    Description: 'Optional environment variable 23 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment24Key:
+    Description: 'Optional environment variable 24 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment24Value:
+    Description: 'Optional environment variable 24 plain-text value for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment25Key:
+    Description: 'Optional environment variable 25 key for app container.'
+    Type: String
+    Default: ''
+  AppEnvironment25Value:
+    Description: 'Optional environment variable 25 plain-text value for app container.'
+    Type: String
+    Default: ''
   AppCommand:
     Description: 'Optional command for starting app container.'
     Type: CommaDelimitedList
@@ -582,6 +622,11 @@ Conditions:
   HasAppEnvironment18PlainText: !Not [!Equals [!Ref AppEnvironment18Key, '']]
   HasAppEnvironment19PlainText: !Not [!Equals [!Ref AppEnvironment19Key, '']]
   HasAppEnvironment20PlainText: !Not [!Equals [!Ref AppEnvironment20Key, '']]
+  HasAppEnvironment21PlainText: !Not [!Equals [!Ref AppEnvironment21Key, '']]
+  HasAppEnvironment22PlainText: !Not [!Equals [!Ref AppEnvironment22Key, '']]
+  HasAppEnvironment23PlainText: !Not [!Equals [!Ref AppEnvironment23Key, '']]
+  HasAppEnvironment24PlainText: !Not [!Equals [!Ref AppEnvironment24Key, '']]
+  HasAppEnvironment25PlainText: !Not [!Equals [!Ref AppEnvironment25Key, '']]
   HasAppCommand: !Not [!Equals [!Join ['', !Ref AppCommand], '']]
   HasAppEnvironment1Secret: !And [!Not [!Equals [!Ref AppEnvironment1Key, '']], !Not [!Equals [!Ref AppEnvironment1SecretModule, '']]]
   HasAppEnvironment2Secret: !And [!Not [!Equals [!Ref AppEnvironment2Key, '']], !Not [!Equals [!Ref AppEnvironment2SecretModule, '']]]
@@ -819,6 +864,11 @@ Resources:
         - !If [HasAppEnvironment18PlainText, {Name: !Ref AppEnvironment18Key, Value: !Ref AppEnvironment18Value}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment19PlainText, {Name: !Ref AppEnvironment19Key, Value: !Ref AppEnvironment19Value}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment20PlainText, {Name: !Ref AppEnvironment20Key, Value: !Ref AppEnvironment20Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment21PlainText, {Name: !Ref AppEnvironment21Key, Value: !Ref AppEnvironment21Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment22PlainText, {Name: !Ref AppEnvironment22Key, Value: !Ref AppEnvironment22Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment23PlainText, {Name: !Ref AppEnvironment23Key, Value: !Ref AppEnvironment23Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment24PlainText, {Name: !Ref AppEnvironment24Key, Value: !Ref AppEnvironment24Value}, !Ref 'AWS::NoValue']
+        - !If [HasAppEnvironment25PlainText, {Name: !Ref AppEnvironment25Key, Value: !Ref AppEnvironment25Value}, !Ref 'AWS::NoValue']
         Secrets:
         - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
@@ -1059,7 +1109,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.13.0'
+    Value: '2.14.0'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
