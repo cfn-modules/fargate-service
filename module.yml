@@ -196,7 +196,7 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment5SecretModule:
-    Description: 'Optional environment variable 5 stack name of secret module for app container (if AppEnvironment5Key is set, set either AppEnvironment5Value or AppEnvironment3SecretModule).'
+    Description: 'Optional environment variable 5 stack name of secret module for app container (if AppEnvironment5Key is set, set either AppEnvironment5Value or AppEnvironment5SecretModule).'
     Type: String
     Default: ''
   AppEnvironment6Key:
@@ -480,8 +480,8 @@ Parameters:
     Type: String
     Default: Public
     AllowedValues:
-    - Public
-    - Private
+      - Public
+      - Private
   AutoScaling:
     Description: 'Scale number of tasks based on CPU load?'
     Type: String
@@ -669,244 +669,258 @@ Resources:
     Properties:
       AssumeRolePolicyDocument:
         Statement:
-        - Effect: Allow
-          Principal:
-            Service: 'ecs-tasks.amazonaws.com'
-          Action: 'sts:AssumeRole'
+          - Effect: Allow
+            Principal:
+              Service: 'ecs-tasks.amazonaws.com'
+            Action: 'sts:AssumeRole'
       Policies:
-      - PolicyName: AmazonECSTaskExecutionRolePolicy # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
-        PolicyDocument:
-          Statement:
-          - Effect: Allow
-            Action:
-            - 'ecr:GetAuthorizationToken'
-            - 'ecr:BatchCheckLayerAvailability'
-            - 'ecr:GetDownloadUrlForLayer'
-            - 'ecr:BatchGetImage'
-            Resource: '*'
-          - Effect: Allow
-            Action:
-            - 'logs:CreateLogStream'
-            - 'logs:PutLogEvents'
-            Resource: !GetAtt 'LogGroup.Arn'
-          - Effect: Allow
-            Action: 'kms:Decrypt'
-            Resource: '*'
-          - !If
-            - HasProxyImageSecretModule
-            - Effect: Allow
-              Action: 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${ProxyImageSecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasAppImageSecretModule
-            - Effect: Allow
-              Action: 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${AppImageSecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasSidecarImageSecretModule
-            - Effect: Allow
-              Action: 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${SidecarImageSecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasAppEnvironment1Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasAppEnvironment2Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasAppEnvironment3Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasProxyEnvironment1Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasProxyEnvironment2Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasProxyEnvironment3Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasSidecarEnvironment1Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasSidecarEnvironment2Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
-          - !If
-            - HasSidecarEnvironment3Secret
-            - Effect: Allow
-              Action:
-              - 'secretsmanager:GetSecretValue'
-              Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}
-            - !Ref 'AWS::NoValue'
+        - PolicyName: AmazonECSTaskExecutionRolePolicy # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'ecr:GetAuthorizationToken'
+                  - 'ecr:BatchCheckLayerAvailability'
+                  - 'ecr:GetDownloadUrlForLayer'
+                  - 'ecr:BatchGetImage'
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource: !GetAtt 'LogGroup.Arn'
+              - Effect: Allow
+                Action: 'kms:Decrypt'
+                Resource: '*'
+              - !If
+                - HasProxyImageSecretModule
+                - Effect: Allow
+                  Action: 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${ProxyImageSecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasAppImageSecretModule
+                - Effect: Allow
+                  Action: 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${AppImageSecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasSidecarImageSecretModule
+                - Effect: Allow
+                  Action: 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${SidecarImageSecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasAppEnvironment1Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasAppEnvironment2Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasAppEnvironment3Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasAppEnvironment4Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${AppEnvironment4SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasAppEnvironment5Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${AppEnvironment5SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasProxyEnvironment1Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasProxyEnvironment2Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasProxyEnvironment3Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasSidecarEnvironment1Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasSidecarEnvironment2Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
+              - !If
+                - HasSidecarEnvironment3Secret
+                - Effect: Allow
+                  Action:
+                    - 'secretsmanager:GetSecretValue'
+                  Resource: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}
+                - !Ref 'AWS::NoValue'
   TaskRole:
     Type: 'AWS::IAM::Role'
     Properties:
       AssumeRolePolicyDocument:
         Statement:
-        - Effect: Allow
-          Principal:
-            Service: 'ecs-tasks.amazonaws.com'
-          Action: 'sts:AssumeRole'
+          - Effect: Allow
+            Principal:
+              Service: 'ecs-tasks.amazonaws.com'
+            Action: 'sts:AssumeRole'
       Policies:
-      - !If
-        - HasExecuteCommand
-        - PolicyName: AmazonECSTaskRolePolicy # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
-          PolicyDocument:
-            Statement:
-            - Effect: Allow
-              Action:
-              - 'ssmmessages:CreateControlChannel'
-              - 'ssmmessages:CreateDataChannel'
-              - 'ssmmessages:OpenControlChannel'
-              - 'ssmmessages:OpenDataChannel'
-              Resource: '*'
-        - !Ref 'AWS::NoValue'
+        - !If
+          - HasExecuteCommand
+          - PolicyName: AmazonECSTaskRolePolicy # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+            PolicyDocument:
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - 'ssmmessages:CreateControlChannel'
+                    - 'ssmmessages:CreateDataChannel'
+                    - 'ssmmessages:OpenControlChannel'
+                    - 'ssmmessages:OpenDataChannel'
+                  Resource: '*'
+          - !Ref 'AWS::NoValue'
       ManagedPolicyArns: !If [HasManagedPolicyArns, !Split [',', !Ref ManagedPolicyArns], !Ref 'AWS::NoValue']
   TaskDefinition:
     Type: 'AWS::ECS::TaskDefinition'
     Properties:
       ContainerDefinitions:
-      - !If
-        - HasProxyImage
-        - Name: proxy
-          Image: !Ref ProxyImage
-          RepositoryCredentials: !If [HasProxyImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${ProxyImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+        - !If
+          - HasProxyImage
+          - Name: proxy
+            Image: !Ref ProxyImage
+            RepositoryCredentials: !If [HasProxyImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${ProxyImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            PortMappings:
+              - !If [HasTargetModule, {ContainerPort: !Ref ProxyPort, Protocol: tcp}, !Ref 'AWS::NoValue']
+            Essential: true
+            LogConfiguration:
+              LogDriver: awslogs
+              Options:
+                'awslogs-region': !Ref 'AWS::Region'
+                'awslogs-group': !Ref LogGroup
+                'awslogs-stream-prefix': proxy
+            Environment:
+              - !If [HasProxyEnvironment1PlainText, {Name: !Ref ProxyEnvironment1Key, Value: !Ref ProxyEnvironment1Value}, !Ref 'AWS::NoValue']
+              - !If [HasProxyEnvironment2PlainText, {Name: !Ref ProxyEnvironment2Key, Value: !Ref ProxyEnvironment2Value}, !Ref 'AWS::NoValue']
+              - !If [HasProxyEnvironment3PlainText, {Name: !Ref ProxyEnvironment3Key, Value: !Ref ProxyEnvironment3Value}, !Ref 'AWS::NoValue']
+              - !If [HasProxyEnvironment4PlainText, {Name: !Ref ProxyEnvironment4Key, Value: !Ref ProxyEnvironment4Value}, !Ref 'AWS::NoValue']
+              - !If [HasProxyEnvironment5PlainText, {Name: !Ref ProxyEnvironment5Key, Value: !Ref ProxyEnvironment5Value}, !Ref 'AWS::NoValue']
+            Secrets:
+              - !If [HasProxyEnvironment1Secret, {Name: !Ref ProxyEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+              - !If [HasProxyEnvironment2Secret, {Name: !Ref ProxyEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+              - !If [HasProxyEnvironment3Secret, {Name: !Ref ProxyEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+              - !If [HasProxyEnvironment4Secret, {Name: !Ref ProxyEnvironment4Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment4SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+              - !If [HasProxyEnvironment5Secret, {Name: !Ref ProxyEnvironment5Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment5SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            MountPoints:
+              - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
+          - !Ref 'AWS::NoValue'
+        - Name: app
+          Image: !Ref AppImage
+          RepositoryCredentials: !If [HasAppImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${AppImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           PortMappings:
-          - !If [HasTargetModule, {ContainerPort: !Ref ProxyPort, Protocol: tcp}, !Ref 'AWS::NoValue']
+            - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
           Essential: true
+          Command: !If [HasAppCommand, !Ref AppCommand, !Ref 'AWS::NoValue']
           LogConfiguration:
             LogDriver: awslogs
             Options:
               'awslogs-region': !Ref 'AWS::Region'
               'awslogs-group': !Ref LogGroup
-              'awslogs-stream-prefix': proxy
+              'awslogs-stream-prefix': app
           Environment:
-          - !If [HasProxyEnvironment1PlainText, {Name: !Ref ProxyEnvironment1Key, Value: !Ref ProxyEnvironment1Value}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment2PlainText, {Name: !Ref ProxyEnvironment2Key, Value: !Ref ProxyEnvironment2Value}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment3PlainText, {Name: !Ref ProxyEnvironment3Key, Value: !Ref ProxyEnvironment3Value}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment4PlainText, {Name: !Ref ProxyEnvironment4Key, Value: !Ref ProxyEnvironment4Value}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment5PlainText, {Name: !Ref ProxyEnvironment5Key, Value: !Ref ProxyEnvironment5Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment1PlainText, {Name: !Ref AppEnvironment1Key, Value: !Ref AppEnvironment1Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment2PlainText, {Name: !Ref AppEnvironment2Key, Value: !Ref AppEnvironment2Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment3PlainText, {Name: !Ref AppEnvironment3Key, Value: !Ref AppEnvironment3Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment4PlainText, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment5PlainText, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment6PlainText, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment7PlainText, {Name: !Ref AppEnvironment7Key, Value: !Ref AppEnvironment7Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment8PlainText, {Name: !Ref AppEnvironment8Key, Value: !Ref AppEnvironment8Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment9PlainText, {Name: !Ref AppEnvironment9Key, Value: !Ref AppEnvironment9Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment10PlainText, {Name: !Ref AppEnvironment10Key, Value: !Ref AppEnvironment10Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment11PlainText, {Name: !Ref AppEnvironment11Key, Value: !Ref AppEnvironment11Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment12PlainText, {Name: !Ref AppEnvironment12Key, Value: !Ref AppEnvironment12Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment13PlainText, {Name: !Ref AppEnvironment13Key, Value: !Ref AppEnvironment13Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment14PlainText, {Name: !Ref AppEnvironment14Key, Value: !Ref AppEnvironment14Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment15PlainText, {Name: !Ref AppEnvironment15Key, Value: !Ref AppEnvironment15Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment16PlainText, {Name: !Ref AppEnvironment16Key, Value: !Ref AppEnvironment16Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment17PlainText, {Name: !Ref AppEnvironment17Key, Value: !Ref AppEnvironment17Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment18PlainText, {Name: !Ref AppEnvironment18Key, Value: !Ref AppEnvironment18Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment19PlainText, {Name: !Ref AppEnvironment19Key, Value: !Ref AppEnvironment19Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment20PlainText, {Name: !Ref AppEnvironment20Key, Value: !Ref AppEnvironment20Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment21PlainText, {Name: !Ref AppEnvironment21Key, Value: !Ref AppEnvironment21Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment22PlainText, {Name: !Ref AppEnvironment22Key, Value: !Ref AppEnvironment22Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment23PlainText, {Name: !Ref AppEnvironment23Key, Value: !Ref AppEnvironment23Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment24PlainText, {Name: !Ref AppEnvironment24Key, Value: !Ref AppEnvironment24Value}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment25PlainText, {Name: !Ref AppEnvironment25Key, Value: !Ref AppEnvironment25Value}, !Ref 'AWS::NoValue']
           Secrets:
-          - !If [HasProxyEnvironment1Secret, {Name: !Ref ProxyEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment2Secret, {Name: !Ref ProxyEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment3Secret, {Name: !Ref ProxyEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment4Secret, {Name: !Ref ProxyEnvironment4Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment4SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasProxyEnvironment5Secret, {Name: !Ref ProxyEnvironment5Key, ValueFrom: {'Fn::ImportValue': !Sub '${ProxyEnvironment5SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment3Secret, {Name: !Ref AppEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment4Secret, {Name: !Ref AppEnvironment4Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment4SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            - !If [HasAppEnvironment5Secret, {Name: !Ref AppEnvironment5Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment5SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
           MountPoints:
-          - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
-        - !Ref 'AWS::NoValue'
-      - Name: app
-        Image: !Ref AppImage
-        RepositoryCredentials: !If [HasAppImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${AppImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-        PortMappings:
-        - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
-        Essential: true
-        Command: !If [HasAppCommand, !Ref AppCommand, !Ref 'AWS::NoValue']
-        LogConfiguration:
-          LogDriver: awslogs
-          Options:
-            'awslogs-region': !Ref 'AWS::Region'
-            'awslogs-group': !Ref LogGroup
-            'awslogs-stream-prefix': app
-        Environment:
-        - !If [HasAppEnvironment1PlainText, {Name: !Ref AppEnvironment1Key, Value: !Ref AppEnvironment1Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment2PlainText, {Name: !Ref AppEnvironment2Key, Value: !Ref AppEnvironment2Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment3PlainText, {Name: !Ref AppEnvironment3Key, Value: !Ref AppEnvironment3Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment4PlainText, {Name: !Ref AppEnvironment4Key, Value: !Ref AppEnvironment4Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment5PlainText, {Name: !Ref AppEnvironment5Key, Value: !Ref AppEnvironment5Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment6PlainText, {Name: !Ref AppEnvironment6Key, Value: !Ref AppEnvironment6Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment7PlainText, {Name: !Ref AppEnvironment7Key, Value: !Ref AppEnvironment7Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment8PlainText, {Name: !Ref AppEnvironment8Key, Value: !Ref AppEnvironment8Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment9PlainText, {Name: !Ref AppEnvironment9Key, Value: !Ref AppEnvironment9Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment10PlainText, {Name: !Ref AppEnvironment10Key, Value: !Ref AppEnvironment10Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment11PlainText, {Name: !Ref AppEnvironment11Key, Value: !Ref AppEnvironment11Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment12PlainText, {Name: !Ref AppEnvironment12Key, Value: !Ref AppEnvironment12Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment13PlainText, {Name: !Ref AppEnvironment13Key, Value: !Ref AppEnvironment13Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment14PlainText, {Name: !Ref AppEnvironment14Key, Value: !Ref AppEnvironment14Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment15PlainText, {Name: !Ref AppEnvironment15Key, Value: !Ref AppEnvironment15Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment16PlainText, {Name: !Ref AppEnvironment16Key, Value: !Ref AppEnvironment16Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment17PlainText, {Name: !Ref AppEnvironment17Key, Value: !Ref AppEnvironment17Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment18PlainText, {Name: !Ref AppEnvironment18Key, Value: !Ref AppEnvironment18Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment19PlainText, {Name: !Ref AppEnvironment19Key, Value: !Ref AppEnvironment19Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment20PlainText, {Name: !Ref AppEnvironment20Key, Value: !Ref AppEnvironment20Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment21PlainText, {Name: !Ref AppEnvironment21Key, Value: !Ref AppEnvironment21Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment22PlainText, {Name: !Ref AppEnvironment22Key, Value: !Ref AppEnvironment22Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment23PlainText, {Name: !Ref AppEnvironment23Key, Value: !Ref AppEnvironment23Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment24PlainText, {Name: !Ref AppEnvironment24Key, Value: !Ref AppEnvironment24Value}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment25PlainText, {Name: !Ref AppEnvironment25Key, Value: !Ref AppEnvironment25Value}, !Ref 'AWS::NoValue']
-        Secrets:
-        - !If [HasAppEnvironment1Secret, {Name: !Ref AppEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment2Secret, {Name: !Ref AppEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment3Secret, {Name: !Ref AppEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment4Secret, {Name: !Ref AppEnvironment4Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment4SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-        - !If [HasAppEnvironment5Secret, {Name: !Ref AppEnvironment5Key, ValueFrom: {'Fn::ImportValue': !Sub '${AppEnvironment5SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-        MountPoints:
-        - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
-      - !If
-        - HasSidecarImage
-        - Name: sidecar
-          Image: !Ref SidecarImage
-          RepositoryCredentials: !If [HasSidecarImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${SidecarImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          PortMappings:
-          - ContainerPort: !Ref SidecarPort
-            Protocol: !Ref SidecarProtocol
-          Essential: false
-          LogConfiguration:
-            LogDriver: awslogs
-            Options:
-              'awslogs-region': !Ref 'AWS::Region'
-              'awslogs-group': !Ref LogGroup
-              'awslogs-stream-prefix': sidecar
-          Environment:
-          - !If [HasSidecarEnvironment1PlainText, {Name: !Ref SidecarEnvironment1Key, Value: !Ref SidecarEnvironment1Value}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment2PlainText, {Name: !Ref SidecarEnvironment2Key, Value: !Ref SidecarEnvironment2Value}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment3PlainText, {Name: !Ref SidecarEnvironment3Key, Value: !Ref SidecarEnvironment3Value}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment4PlainText, {Name: !Ref SidecarEnvironment4Key, Value: !Ref SidecarEnvironment4Value}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment5PlainText, {Name: !Ref SidecarEnvironment5Key, Value: !Ref SidecarEnvironment5Value}, !Ref 'AWS::NoValue']
-          Secrets:
-          - !If [HasSidecarEnvironment1Secret, {Name: !Ref SidecarEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment2Secret, {Name: !Ref SidecarEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment3Secret, {Name: !Ref SidecarEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment4Secret, {Name: !Ref SidecarEnvironment4Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment4SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          - !If [HasSidecarEnvironment5Secret, {Name: !Ref SidecarEnvironment5Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment5SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
-          MountPoints:
-          - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
-        - !Ref 'AWS::NoValue'
+            - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
+        - !If
+          - HasSidecarImage
+          - Name: sidecar
+            Image: !Ref SidecarImage
+            RepositoryCredentials: !If [HasSidecarImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${SidecarImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            PortMappings:
+              - ContainerPort: !Ref SidecarPort
+                Protocol: !Ref SidecarProtocol
+            Essential: false
+            LogConfiguration:
+              LogDriver: awslogs
+              Options:
+                'awslogs-region': !Ref 'AWS::Region'
+                'awslogs-group': !Ref LogGroup
+                'awslogs-stream-prefix': sidecar
+            Environment:
+              - !If [HasSidecarEnvironment1PlainText, {Name: !Ref SidecarEnvironment1Key, Value: !Ref SidecarEnvironment1Value}, !Ref 'AWS::NoValue']
+              - !If [HasSidecarEnvironment2PlainText, {Name: !Ref SidecarEnvironment2Key, Value: !Ref SidecarEnvironment2Value}, !Ref 'AWS::NoValue']
+              - !If [HasSidecarEnvironment3PlainText, {Name: !Ref SidecarEnvironment3Key, Value: !Ref SidecarEnvironment3Value}, !Ref 'AWS::NoValue']
+              - !If [HasSidecarEnvironment4PlainText, {Name: !Ref SidecarEnvironment4Key, Value: !Ref SidecarEnvironment4Value}, !Ref 'AWS::NoValue']
+              - !If [HasSidecarEnvironment5PlainText, {Name: !Ref SidecarEnvironment5Key, Value: !Ref SidecarEnvironment5Value}, !Ref 'AWS::NoValue']
+            Secrets:
+              - !If [HasSidecarEnvironment1Secret, {Name: !Ref SidecarEnvironment1Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment1SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+              - !If [HasSidecarEnvironment2Secret, {Name: !Ref SidecarEnvironment2Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment2SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+              - !If [HasSidecarEnvironment3Secret, {Name: !Ref SidecarEnvironment3Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment3SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+              - !If [HasSidecarEnvironment4Secret, {Name: !Ref SidecarEnvironment4Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment4SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+              - !If [HasSidecarEnvironment5Secret, {Name: !Ref SidecarEnvironment5Key, ValueFrom: {'Fn::ImportValue': !Sub '${SidecarEnvironment5SecretModule}-Arn'}}, !Ref 'AWS::NoValue']
+            MountPoints:
+              - !If [HasFileSystemModule1, {ContainerPath: '/mnt/efs1', SourceVolume: efs1}, !Ref 'AWS::NoValue']
+          - !Ref 'AWS::NoValue'
       Cpu: !FindInMap [CpuMap, !Ref Cpu, Cpu]
       ExecutionRoleArn: !GetAtt 'TaskExecutionRole.Arn'
       Family: !Ref 'AWS::StackName'
@@ -915,7 +929,7 @@ Resources:
       RequiresCompatibilities: [FARGATE]
       TaskRoleArn: !GetAtt 'TaskRole.Arn'
       Volumes:
-      - !If [HasFileSystemModule1, {EFSVolumeConfiguration: {FilesystemId: {'Fn::ImportValue': !Sub '${FileSystemModule1}-Id'}, TransitEncryption: ENABLED}, Name: efs1}, !Ref 'AWS::NoValue']
+        - !If [HasFileSystemModule1, {EFSVolumeConfiguration: {FilesystemId: {'Fn::ImportValue': !Sub '${FileSystemModule1}-Id'}, TransitEncryption: ENABLED}, Name: efs1}, !Ref 'AWS::NoValue']
       RuntimePlatform:
         CpuArchitecture: !Ref CpuArchitecture
         OperatingSystemFamily: !Ref OperatingSystemFamily
@@ -933,9 +947,9 @@ Resources:
     Type: 'AWS::ECS::Service'
     Properties:
       CapacityProviderStrategy:
-      - Base: 0
-        CapacityProvider: !If [HasSpot, FARGATE_SPOT, FARGATE]
-        Weight: 1
+        - Base: 0
+          CapacityProvider: !If [HasSpot, FARGATE_SPOT, FARGATE]
+          Weight: 1
       Cluster: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
       DeploymentConfiguration:
         MaximumPercent: 200
@@ -946,15 +960,15 @@ Resources:
       DesiredCount: !Ref DesiredCount
       HealthCheckGracePeriodSeconds: !If [HasTargetModule, !Ref HealthCheckGracePeriodSeconds, !Ref 'AWS::NoValue']
       LoadBalancers:
-      - !If [HasTargetModule, {ContainerName: !If [HasProxyImage, proxy, app], ContainerPort: !If [HasProxyImage, !Ref ProxyPort, !Ref AppPort], TargetGroupArn: {'Fn::ImportValue': !Sub '${TargetModule}-Arn'}}, !Ref 'AWS::NoValue']
+        - !If [HasTargetModule, {ContainerName: !If [HasProxyImage, proxy, app], ContainerPort: !If [HasProxyImage, !Ref ProxyPort, !Ref AppPort], TargetGroupArn: {'Fn::ImportValue': !Sub '${TargetModule}-Arn'}}, !Ref 'AWS::NoValue']
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: !If [HasSubnetsReachPublic, ENABLED, DISABLED]
           SecurityGroups:
-          - !If [HasTargetModule, {'Fn::ImportValue': !Sub '${TargetModule}-SecurityGroupId'}, !Ref SecurityGroup]
-          - !If [HasClientSgModule1, {'Fn::ImportValue': !Sub '${ClientSgModule1}-SecurityGroupId'}, !Ref 'AWS::NoValue']
-          - !If [HasClientSgModule2, {'Fn::ImportValue': !Sub '${ClientSgModule2}-SecurityGroupId'}, !Ref 'AWS::NoValue']
-          - !If [HasClientSgModule3, {'Fn::ImportValue': !Sub '${ClientSgModule3}-SecurityGroupId'}, !Ref 'AWS::NoValue']
+            - !If [HasTargetModule, {'Fn::ImportValue': !Sub '${TargetModule}-SecurityGroupId'}, !Ref SecurityGroup]
+            - !If [HasClientSgModule1, {'Fn::ImportValue': !Sub '${ClientSgModule1}-SecurityGroupId'}, !Ref 'AWS::NoValue']
+            - !If [HasClientSgModule2, {'Fn::ImportValue': !Sub '${ClientSgModule2}-SecurityGroupId'}, !Ref 'AWS::NoValue']
+            - !If [HasClientSgModule3, {'Fn::ImportValue': !Sub '${ClientSgModule3}-SecurityGroupId'}, !Ref 'AWS::NoValue']
           Subnets: !Split [',', {'Fn::ImportValue': !Sub '${VpcModule}-SubnetIds${SubnetsReach}'}]
       PlatformVersion: '1.4.0'
       TaskDefinition: !Ref TaskDefinition
@@ -965,19 +979,19 @@ Resources:
     Properties:
       EventPattern:
         source:
-        - 'aws.ecs'
+          - 'aws.ecs'
         'detail-type':
-        - 'ECS Service Action'
+          - 'ECS Service Action'
         resources:
-        - !Ref Service
+          - !Ref Service
         detail:
           eventType:
-          - ERROR
-          - WARN
+            - ERROR
+            - WARN
       State: ENABLED
       Targets:
-      - Arn: {'Fn::ImportValue': !Sub '${AlertingModule}-Arn'}
-        Id: rule
+        - Arn: {'Fn::ImportValue': !Sub '${AlertingModule}-Arn'}
+          Id: rule
   ScalableTargetRole: # based on http://docs.aws.amazon.com/AmazonECS/latest/developerguide/autoscale_IAM_role.html
     Condition: HasAutoScaling
     Type: 'AWS::IAM::Role'
@@ -985,28 +999,28 @@ Resources:
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
-        - Effect: Allow
-          Principal:
-            Service: 'application-autoscaling.amazonaws.com'
-          Action: 'sts:AssumeRole'
+          - Effect: Allow
+            Principal:
+              Service: 'application-autoscaling.amazonaws.com'
+            Action: 'sts:AssumeRole'
       Policies:
-      - PolicyName: AmazonEC2ContainerServiceAutoscaleRole
-        PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-          - Effect: Allow
-            Action:
-            - 'ecs:DescribeServices'
-            - 'ecs:UpdateService'
-            Resource: '*'
-      - PolicyName: cloudwatch
-        PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-          - Effect: Allow
-            Action:
-            - 'cloudwatch:DescribeAlarms'
-            Resource: '*'
+        - PolicyName: AmazonEC2ContainerServiceAutoscaleRole
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'ecs:DescribeServices'
+                  - 'ecs:UpdateService'
+                Resource: '*'
+        - PolicyName: cloudwatch
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'cloudwatch:DescribeAlarms'
+                Resource: '*'
   ScalableTarget:
     Condition: HasAutoScaling
     Type: 'AWS::ApplicationAutoScaling::ScalableTarget'
@@ -1014,9 +1028,9 @@ Resources:
       MaxCapacity: !Ref MaxCapacity
       MinCapacity: !Ref MinCapacity
       ResourceId: !Sub
-      - 'service/${Cluster}/${Service}'
-      - Cluster: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
-        Service: !GetAtt 'Service.Name'
+        - 'service/${Cluster}/${Service}'
+        - Cluster: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
+          Service: !GetAtt 'Service.Name'
       RoleARN: !GetAtt 'ScalableTargetRole.Arn'
       ScalableDimension: 'ecs:service:DesiredCount'
       ServiceNamespace: ecs
@@ -1032,8 +1046,8 @@ Resources:
         Cooldown: 300
         MinAdjustmentMagnitude: 1
         StepAdjustments:
-        - MetricIntervalLowerBound: 0
-          ScalingAdjustment: 25
+          - MetricIntervalLowerBound: 0
+            ScalingAdjustment: 25
   ScaleDownPolicy:
     Condition: HasAutoScaling
     Type: 'AWS::ApplicationAutoScaling::ScalingPolicy'
@@ -1046,8 +1060,8 @@ Resources:
         Cooldown: 300
         MinAdjustmentMagnitude: 1
         StepAdjustments:
-        - MetricIntervalUpperBound: 0
-          ScalingAdjustment: -25
+          - MetricIntervalUpperBound: 0
+            ScalingAdjustment: -25
   CPUUtilizationTooHighAlarm:
     Condition: HasAlertingModule
     Type: 'AWS::CloudWatch::Alarm'
@@ -1055,10 +1069,10 @@ Resources:
       AlarmDescription: 'Average CPU utilization over last 10 minutes higher than 80%'
       Namespace: 'AWS/ECS'
       Dimensions:
-      - Name: ClusterName
-        Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
-      - Name: ServiceName
-        Value: !GetAtt 'Service.Name'
+        - Name: ClusterName
+          Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
+        - Name: ServiceName
+          Value: !GetAtt 'Service.Name'
       MetricName: CPUUtilization
       ComparisonOperator: GreaterThanThreshold
       Statistic: Average
@@ -1066,7 +1080,7 @@ Resources:
       EvaluationPeriods: 1
       Threshold: 80
       AlarmActions:
-      - {'Fn::ImportValue': !Sub '${AlertingModule}-Arn'}
+        - {'Fn::ImportValue': !Sub '${AlertingModule}-Arn'}
   CPUUtilizationHighAlarm:
     Condition: HasAutoScaling
     Type: 'AWS::CloudWatch::Alarm'
@@ -1074,10 +1088,10 @@ Resources:
       AlarmDescription: 'Service is running out of CPU'
       Namespace: 'AWS/ECS'
       Dimensions:
-      - Name: ClusterName
-        Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
-      - Name: ServiceName
-        Value: !GetAtt 'Service.Name'
+        - Name: ClusterName
+          Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
+        - Name: ServiceName
+          Value: !GetAtt 'Service.Name'
       MetricName: CPUUtilization
       ComparisonOperator: GreaterThanThreshold
       Statistic: Average
@@ -1085,7 +1099,7 @@ Resources:
       EvaluationPeriods: 1
       Threshold: 60
       AlarmActions:
-      - !Ref ScaleUpPolicy
+        - !Ref ScaleUpPolicy
   CPUUtilizationLowAlarm:
     Condition: HasAutoScaling
     Type: 'AWS::CloudWatch::Alarm'
@@ -1093,10 +1107,10 @@ Resources:
       AlarmDescription: 'Service is wasting CPU'
       Namespace: 'AWS/ECS'
       Dimensions:
-      - Name: ClusterName
-        Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
-      - Name: ServiceName
-        Value: !GetAtt 'Service.Name'
+        - Name: ClusterName
+          Value: !If [HasClusterModule, {'Fn::ImportValue': !Sub '${ClusterModule}-Name'}, !Ref Cluster]
+        - Name: ServiceName
+          Value: !GetAtt 'Service.Name'
       MetricName: CPUUtilization
       ComparisonOperator: LessThanThreshold
       Statistic: Average
@@ -1104,12 +1118,12 @@ Resources:
       EvaluationPeriods: 3
       Threshold: 30
       AlarmActions:
-      - !Ref ScaleDownPolicy
+        - !Ref ScaleDownPolicy
 Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.14.0'
+    Value: '2.14.1'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
