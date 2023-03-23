@@ -196,7 +196,7 @@ Parameters:
     Type: String
     Default: ''
   AppEnvironment5SecretModule:
-    Description: 'Optional environment variable 5 stack name of secret module for app container (if AppEnvironment5Key is set, set either AppEnvironment5Value or AppEnvironment3SecretModule).'
+    Description: 'Optional environment variable 5 stack name of secret module for app container (if AppEnvironment5Key is set, set either AppEnvironment5Value or AppEnvironment5SecretModule).'
     Type: String
     Default: ''
   AppEnvironment6Key:
@@ -730,6 +730,20 @@ Resources:
               Action:
               - 'secretsmanager:GetSecretValue'
               Resource: {'Fn::ImportValue': !Sub '${AppEnvironment3SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasAppEnvironment4Secret
+            - Effect: Allow
+              Action:
+                - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment4SecretModule}-Arn'}
+            - !Ref 'AWS::NoValue'
+          - !If
+            - HasAppEnvironment5Secret
+            - Effect: Allow
+              Action:
+                - 'secretsmanager:GetSecretValue'
+              Resource: {'Fn::ImportValue': !Sub '${AppEnvironment5SecretModule}-Arn'}
             - !Ref 'AWS::NoValue'
           - !If
             - HasProxyEnvironment1Secret
