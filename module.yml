@@ -735,14 +735,14 @@ Resources:
             - HasAppEnvironment4Secret
             - Effect: Allow
               Action:
-                - 'secretsmanager:GetSecretValue'
+              - 'secretsmanager:GetSecretValue'
               Resource: {'Fn::ImportValue': !Sub '${AppEnvironment4SecretModule}-Arn'}
             - !Ref 'AWS::NoValue'
           - !If
             - HasAppEnvironment5Secret
             - Effect: Allow
               Action:
-                - 'secretsmanager:GetSecretValue'
+              - 'secretsmanager:GetSecretValue'
               Resource: {'Fn::ImportValue': !Sub '${AppEnvironment5SecretModule}-Arn'}
             - !Ref 'AWS::NoValue'
           - !If
@@ -1123,7 +1123,7 @@ Outputs:
   ModuleId:
     Value: 'fargate-service'
   ModuleVersion:
-    Value: '2.14.0'
+    Value: '2.14.1'
   StackName:
     Value: !Ref 'AWS::StackName'
   TaskRoleArn:
