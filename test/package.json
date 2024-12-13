@@ -1,8 +1,8 @@
 {
   "private": true,
   "dependencies": {
-    "@cfn-modules/alb": "1.1.0",
-    "@cfn-modules/alb-listener": "1.3.0",
+    "@cfn-modules/alb": "1.2.0",
+    "@cfn-modules/alb-listener": "1.4.0",
     "@cfn-modules/client-sg": "1.0.0",
     "@cfn-modules/ecs-alb-target": "1.4.0",
     "@cfn-modules/ecs-cluster": "1.2.0",
